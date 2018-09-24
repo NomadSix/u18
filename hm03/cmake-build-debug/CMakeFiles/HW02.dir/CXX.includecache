@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/src/List.hpp
+stdexcept
+-
+
+C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/src/main.cpp
+iostream
+-
+List.hpp
+C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/src/List.hpp
+

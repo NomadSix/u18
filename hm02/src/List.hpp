@@ -13,11 +13,14 @@ typedef unsigned int uint;
 
 // Any necessary includes
 #include <stdexcept>
+#include <memory>
+#include <string.h>
 using namespace std;
 
 // It's a template class
 template <class T>
-class List {
+class List 
+{
 public:
     // Default Constructor
 	List();
@@ -49,9 +52,9 @@ public:
 	T& at(const uint); //TODO fing out what params
     // function search; throws domain error if item doesn't exist
 	int search(const T&);
-    // function sort changes the order of the array
-	void sort(T*, uint);
+    //functions used to sort the array at insert
     void grow();
+    void shiftBack(int);
 private:
     // variable that gives us our dynamic array
     // uint _size;

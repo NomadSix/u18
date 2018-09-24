@@ -8,7 +8,7 @@
 // Default Constructor
 GraphicNovel::GraphicNovel(){}
 // Constructor
-GraphicNovel::GraphicNovel(str first, str last, str illustrator, str title, uint year) : Book(first, last, title, year), _illustrator(illustrator) {}
+GraphicNovel::GraphicNovel(str last, str first, str illustrator, str title, uint year) : Book(last, first, title, year), _illustrator(illustrator) {}
 // Deconstructor
 GraphicNovel::~GraphicNovel(){}
 
@@ -29,8 +29,8 @@ const GraphicNovel& GraphicNovel::operator =(const GraphicNovel& book) {
 	if (this == &book) {
 		return *this;
 	}
-	_first = book._first;
 	_last = book._last;
+	_first = book._first;
 	_title = book._title;
 	_year = book._year;
 	_illustrator = book._illustrator;

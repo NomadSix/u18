@@ -8,11 +8,11 @@
 #include "Book.hpp"
 
 // Constructor
-Book::Book(str last, str first, str title, uint year) : _last(last), _first(first), _title(title), _year(year) {}
+Book::Book(str last, str first, str title, uint year) : _last(last), _first(first),_title(title), _year(year) {}
 // Copy Constructor
 Book::Book(const Book& obj) {
-	_last = obj._last;
 	_first = obj._first;
+	_last = obj._last;
 	_title = obj._title;
 	_year = obj._year;
 }
@@ -35,6 +35,7 @@ bool Book::operator ==(const Book& book) const {
 
 // Overloaded relational operator <
 bool Book::operator <(const Book& book) const {
+	//cout << endl;
 	if (_last < book._last) {
 		return true;
 	}

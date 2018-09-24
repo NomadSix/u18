@@ -9,7 +9,8 @@
 Novel::Novel(){}
 
 // Constructor
-Novel::Novel(str first, str last, str title, uint year) : Book(first, last, title, year) {}
+Novel::Novel(str last, str first, str title, uint year) : Book(last, first, title, year) {}
+//First, last are switched with book ctor
 
 // Destructor
 Novel::~Novel() {}
@@ -24,8 +25,8 @@ const Novel& Novel::operator =(const Novel& book) {
 	if (this == &book)
 		return *this;
 
-	_first = book._first;
 	_last = book._last;
+	_first = book._first;
 	_title = book._title;
 	_year = book._year;
 	return *this;

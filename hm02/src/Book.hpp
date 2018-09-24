@@ -6,8 +6,7 @@
 #ifndef BOOK_HPP
 #define BOOK_HPP
 
-#include <string>
-#include <stdio.h>
+#include <string.h>
 #include <iostream>
 using namespace std;
 typedef unsigned int uint;

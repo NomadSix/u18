@@ -5,39 +5,29 @@
 
 // Default Constructor
 template <class T>
-List<T>::List() : _begin(alloc.allocate(0)), _end(_begin), _cap(_begin) {
-	cout << " default ";
-}
+List<T>::List() : _begin(alloc.allocate(0)), _end(_begin), _cap(_begin) {}
 
 
 // Constructor that takes first item of list
 template <class T>
-List<T>::List(T item) : _begin(alloc.allocate(0)), _end(_begin), _cap(_begin + 1) 
+List<T>::List(T item) : _begin(alloc.allocate(1)), _end(_begin), _cap(_begin + 1) 
 {
-	cout << " construct ";
+	//cout << " construct ";
 	alloc.construct(_end++, item);
 }
 
 // Copy Constructor
-template <class T>
-List<T>::List(const List<T>& list) 
+template <typename T>
+List<T>::List(const List &rhs) : _begin(alloc.allocate(rhs.size())), _end(_begin), _cap(_begin + rhs.size()) 
 {
-	cout << " copy ";
-	_begin = list._begin;
-	_end = list._end;
-	_cap = list._end;
-
-	for (T* i = _begin; i != _begin; i++) {
-		alloc.construct(_end++, move(*i));
-	}
-
-}
+	for (size_t i = 0; i < rhs.size(); i++) 
+		alloc.construct(_end++, rhs._begin[i]); 
+} 
 
 // Move Constructor
 template <class T>
-List<T>::List(List&& list) : _begin(alloc.allocate(0)), _end(_begin), _cap(_begin + 1) 
+List<T>::List(List&& list) 
 {
-	cout << " move ";
 	*this = std::move(list);
 }
 
@@ -45,7 +35,7 @@ List<T>::List(List&& list) : _begin(alloc.allocate(0)), _end(_begin), _cap(_begi
 template <class T>
 List<T>::~List() 
 {
-	cout << " decon ";
+	//cout << " decon ";
 	if (_begin) {        
 		while (_end != _begin) {
             alloc.destroy(--_end);
@@ -59,23 +49,17 @@ List<T>::~List()
 template <class T>
 const List<T>& List<T>::operator =(List<T>& list)
 {
-	cout << " =copy ";
+	//cout << " =copy ";
 	if (this == &list) {
 		return *this;
 	}
 
-	while (_end != _begin) {
-		alloc.destroy(--_end);
-	}
-	alloc.deallocate(_begin, capacity());
-
 	_begin = alloc.allocate(list.capacity());
-	_end = list._end;
+	_end = _begin;
 	_cap = list._cap;
 	for (size_t i = 0; i < list.size(); i ++) {
 		alloc.construct(_end++, list._begin[i]);
 	}
-	//sort(array, _size);
 	return *this;
 }
 
@@ -83,30 +67,15 @@ const List<T>& List<T>::operator =(List<T>& list)
 template <class T>
 List<T>& List<T>::operator =(List<T>&& list) 
 {
-	cout << " = move ";
-	if (this != &list) {
-		_begin = list._begin;
-		_end = list._end;
-		_cap = list._cap;
-		
-		while(_end != _begin) {
-			alloc.destroy(--_end);
-		}
-		alloc.deallocate(_begin, capacity());
-
-		for(size_t i = 0; i < list.size(); i++) {
-			alloc.construct(_end++, list._begin[i]);
-		}
-		list._begin = list._end = list._cap = nullptr;
-
-		
-		while(list._end != list._begin) {
-			list.alloc.destroy(--list._end);
-		}
-		list.alloc.deallocate(list._begin, list.capacity());
-		
+	if (this == &list) {
+		return *this;
 	}
-	//sort(array, _size);
+
+	_begin = list._begin;
+	_end = list._end;
+	_cap = list._cap;
+	list._begin = list._end = list._cap = nullptr;
+
 	return *this;
 }
 
@@ -114,7 +83,7 @@ List<T>& List<T>::operator =(List<T>&& list)
 template <class T>
 T List<T>::operator [](uint index) const 
 {
-	return *(_begin + index);
+	return _begin[index];
 }
 
 
@@ -122,39 +91,20 @@ T List<T>::operator [](uint index) const
 template <class T>
 uint List<T>::size() const noexcept 
 {
-	cout << " size " << (_end - _begin);
 	return _end - _begin;
 }
-
 
 // function capacity; does not throw exceptions
 template <class T>
 uint List<T>::capacity() const noexcept 
 {
-	cout << " cap " << (_cap - _begin);
 	return _cap - _begin;
-}
-
-// function sort change the order of the array
-template <class T>
-void List<T>::sort(T* list, uint count) 
-{
-	T t;
-	for (size_t i = 1; i < count; i++) {
-		for (size_t j = count-1; j >= i; j--) {
-			if (*list[j] < *list[j-1]) {
-				t = list[j-1];
-				list[j-1] = list[j];
-				list[j] = t;
-			}
-		}
-	}
 }
 
 template <class T>
 void List<T>::grow()
 {
-	if (_begin == nullptr) {
+	if (capacity() == 0) {
 		_begin = alloc.allocate(1);
 		_end = _begin;
 		_cap = _begin + 1;
@@ -169,33 +119,45 @@ void List<T>::grow()
 		alloc.construct(tempEnd++, move(*i));
 	}
 	
-	while(_end != _begin){
-		alloc.destroy(--_end);
-	}
-	alloc.deallocate(_begin, capacity());
-	
 	_begin = tempBegin;
 	_end = tempEnd;
 	_cap = tempCap;
-	cout << " grow " << (_end - _begin) << " " << (_cap - _begin);
+}
+
+template <class T>
+void List<T>::shiftBack(int index)	
+{
+	for(int i = size()-1; i >= index; i--){
+		_begin[i+1] = _begin[i];
+	}
+	_end++;
 }
 
 // function insert; does not throw exceptions
 template <class T>
 void List<T>::insert(T item) noexcept 
 {
-	cout << " insert ";
-	if (_end == _cap) {
+	//cout << " insert ";
+	if (capacity() == size()) {
 		grow();
 	}
-	alloc.construct(_end++, item);
+	uint index = 0;
+	// while(index <= size() && *item < *_begin[index]) {
+	while(index < size()) {
+		if (*item < *_begin[index])
+			break;
+		else 
+			index++;
+	}
+	shiftBack(index);
+	_begin[index] = item;
 }
 
 // function erase; throws underflow_error if empty, range_error if item doesn't exist
 template <class T>
 void List<T>::erase(T item) 
 {
-	cout << " erase ";
+	//cout << " erase ";
 	if (size() == 0)
 		throw std::underflow_error("error can't erase item: list is empty");
 	try {
@@ -204,10 +166,9 @@ void List<T>::erase(T item)
 		throw std::range_error("");
 	}
 	
-	for (size_t i = 0; i < size(); i++) {
-		if (*(_begin + i) != item) {
-			//array[i] = array[i+1];
-			alloc.construct(_end++, *(_begin + i + 1));
+	for (size_t i = 0; i < size() - 1; i++) {
+		if (_begin[i] != item) {
+			_begin[i] = _begin[i+1];
 		}
 	}
 	_end--;
@@ -239,7 +200,7 @@ const T& List<T>::at(const uint index) const
 template <class T>
 T& List<T>::at(const uint index) 
 {
-	cout << " at ";
+	//cout << " at ";
 	if (index > size())
 		throw std::out_of_range("error checking index: index out of range");
 	return _begin[index];

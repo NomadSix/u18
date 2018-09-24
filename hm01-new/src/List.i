@@ -5,23 +5,21 @@
 
 // Default Constructor
 template <class T>
-List<T>::List() : _begin(alloc.allocate(1)), _end(_begin), _capacity(_begin + 1) {}
+List<T>::List() : _size(0), _capacity(0), array(new T[_capacity]) {}
 
 
 // Constructor that takes first item of list
 template <class T>
-List<T>::List(T item) : _begin(alloc.allocate(1)), _end(_begin), _capacity(_begin + 1) {
-	alloc.Constructor(_end++, item);
+List<T>::List(T item) : _size(0), _capacity(0), array(new T[_capacity]) {
+	insert(item);
 }
 
 // Copy Constructor
 template <class T>
 List<T>::List(const List<T>& list) {
-	_end = list._end;
-	_begin = list._begin;
-	_capacity = _begin - _end;
+	_size = list._size;
+	_capacity = list._size;
 	array = new T[list._capacity];
-	alloc.Constructor();
 	for (uint i = 0; i < list._size; i++) {
 		array[i] = list.array[i];
 	}

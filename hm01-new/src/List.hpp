@@ -53,12 +53,9 @@ public:
 	void sort(T*, uint);
 private:
     // variable that gives us our dynamic array
-    // uint _size;
-    // T *array;
-    uint* _begin;
-    uint* _end;
+    uint _size;
     uint _capacity;
-    static allocator<T> alloc;
+    T *array;
 	static const int ARRAY_MULT = 2;
 };
 

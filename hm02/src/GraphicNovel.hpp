@@ -7,7 +7,7 @@
 #define GRAPHICNOVEL_HPP_
 
 #include "Book.hpp"
-#include <string>
+#include "string.h"
 #include <iostream>
 using namespace std;
 typedef unsigned int uint;

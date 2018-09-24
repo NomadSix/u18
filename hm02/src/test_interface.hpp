@@ -6,7 +6,7 @@
 #include "Novel.hpp"
 #include "GraphicNovel.hpp"
 
-const int WIDTH = 55;
+const int WIDTH = 50;
 
 bool defConstr();
 bool paramConstr();
@@ -28,7 +28,6 @@ bool sort();
 void runTests()
 {
     char fill = std::cout.fill('.');
-
     std::cout << std::left << std::setw(WIDTH) << "Default Constructor, size, capacity, Destructor" << defConstr() << std::endl;
     std::cout << std::left << std::setw(WIDTH) << "Parameterized Constructor, at, Destructor" << paramConstr() << std::endl;
     std::cout << std::left << std::setw(WIDTH) << "Copy Constructor, insert" << copConstr() << std::endl;
@@ -80,19 +79,9 @@ bool copConstr()
     one.insert(new Novel("Card", "Orson Scott", "Ender's Game", 1985));
     one.insert(new GraphicNovel("Miller", "Frank", "Klaus Janson", "The Dark Knight Returns", 1986));
     List<Book*> two = one;
-    
-    for(size_t i = 0; i < two.size(); i++)
-    {
-        auto book = two.at(i);
-        cout << endl << book->author() << " two";
-    }
-    for(size_t i = 0; i < one.size(); i++)
-    {
-        auto book = one.at(i);
-        cout << endl << book->author() << " one";
-    }
-    // end testing
-    
+    // cout << endl << two.at(2);
+    // cout << endl << one.at(2)->author();
+    // cout << endl;
     return two.size() == 3 && 
            two.capacity() == 3 && 
            two.at(0)->author() == "Orson Scott Card" && 
@@ -110,6 +99,7 @@ bool movConstr()
     one.insert(new GraphicNovel("Miller", "Frank", "Klaus Janson", "The Dark Knight Returns", 1986));
     List<Book*> two = std::move(one);
 
+    //cout << endl << one.at(1)->author();
     return two.size() == 3 && 
            two.capacity() == 4 && 
            two.at(0)->author() == "Orson Scott Card" && 
