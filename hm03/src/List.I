@@ -201,7 +201,7 @@ typename List<T>::iterator List<T>::erase(T item)
 }
 
 template<typename T>
-typename List<T>::const_iterator List<T>::erase(iterator it) const
+typename List<T>::const_iterator List<T>::erase(List<T>::iterator it) const
 {
     iterator pos = begin();
     for (pos; pos != it; ) {
@@ -314,29 +314,7 @@ typename List<T>::iterator List<T>::insert(iterator loc, T item)
     }
 }
 
-template <typename T>
-template <typename... Args>
-void List<T>::emplace_front(Args&&... args)
-{
-    _head.prev(T(std::forward<Args>(args)...));
-}
 
-template<typename T>
-template<typename... Args>
-void List<T>::emplace_blask(Args &&... args)
-{
-    _last.next(T(std::forward<Args>(args)..));
-}
-
-template<typename T>
-template<typename... Args>
-typename List<T>::iterator List<T>::emplace(iterator pos, Args &&... args)
-{
-    if (_head) {
-        Node *item = searchHelper(pos);
-        pos.next(T(std::forward<Args>(args)...));
-    }
-}
 
 template<typename T>
 typename List<T>::Node* List<T>::searchHelper(typename List<T>::iterator loc) const

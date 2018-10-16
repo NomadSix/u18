@@ -73,7 +73,7 @@ public:
 
     // function erase; overload that takes an iterator to what should be erased
     // throws std::invalid_argument
-    const_iterator erase(iterator) const;   //TODO arguments
+    const_iterator erase(iterator it) const;   //TODO arguments
 
     // function insert; takes an iterator to position
     // where insertion occurs as well as item to insert,
@@ -90,13 +90,27 @@ public:
     // insertion occurs as well as item constructor parameters,
     // returns iterator to inserted item
     template <typename... Args>
-    iterator emplace(iterator pos, Args&&...);
+    iterator emplace(iterator pos, Args&&... args)
+    {
+        if (_head) {
+            Node *item = searchHelper(pos);
+            pos.next(T(std::forward<Args>(args)...));
+        }
+    }
+
     // function emplace_back; takes item constructor parameters
     template <typename... Args>
-    void emplace_blask(Args&&...);
+    void emplace_blask(Args&&... args)
+    {
+        _last.next(T(std::forward<Args>(args)...));
+    }
+
     // function emplace_front; takes item constructor parameters
     template <typename... Args>
-    void emplace_front(Args&&...);
+    void emplace_front(Args&&... args)
+    {
+        _head.prev(T(std::forward<Args>(args)...));
+    }
 
     // function size();
     int size();
