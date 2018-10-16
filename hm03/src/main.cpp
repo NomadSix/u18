@@ -1,7 +1,11 @@
 #include <iostream>
-#include "List.hpp"
+#include <utility>
+#include "Album.hpp"
+#include "test_interface.hpp"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+int main()
+{
+    runTests();
+
     return 0;
 }

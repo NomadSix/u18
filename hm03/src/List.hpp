@@ -7,14 +7,15 @@ using namespace std;
 
 // CLASS DECLARATIONS
 template <typename T>
-class List {
+class List
+{
 public:
     // Default constructor
     List();
     // Constructor that takes first item
-    List<T>& (List<T>);
+    List(const T& copy);
     // Copy constructor
-    List(List&);
+    List(const List&);
     // Move constructor
     List(List&&);
     // Destructor
@@ -50,7 +51,7 @@ public:
     // function rend; const_reverse_iterator overload
     const_reverse_iterator rend() const;
     // function cbegin
-    const_iterator cbegin();
+    const_iterator cbegin() const;
     // function cend
     const_iterator cend() const ;
     // function crbegin
@@ -60,24 +61,24 @@ public:
 
     // function search; returns iterator
     // throws std::invalid_argument
-    iterator search();  //TODO arguments
+    iterator search(T);  //TODO arguments
 
     // function search; returns const_iterator
     // throws std::invalid_argument
-    const_iterator search() const;    //TODO arguments
+    const_iterator search(T) const;    //TODO arguments
 
     // function erase; returns iterator to one after what was erased
     // throws std::invalid_argument
-    iterator erase();   //TODO arguments
+    iterator erase(T);   //TODO arguments
 
     // function erase; overload that takes an iterator to what should be erased
     // throws std::invalid_argument
-    const_iterator erase() const ;   //TODO arguments
+    const_iterator erase(iterator) const;   //TODO arguments
 
     // function insert; takes an iterator to position
     // where insertion occurs as well as item to insert,
     // returns iterator to inserted item
-    iterator insert(iterator iter, T item);
+    iterator insert(iterator loc, T item);
 
     // function push_back;
     void push_back(T item);
@@ -88,20 +89,23 @@ public:
     // function emplace; takes an iterator to position where
     // insertion occurs as well as item constructor parameters,
     // returns iterator to inserted item
-    iterator emplace(iterator iter);
+    template <typename... Args>
+    iterator emplace(iterator pos, Args&&...);
     // function emplace_back; takes item constructor parameters
-    iterator emplace_blask(iterator iter);
+    template <typename... Args>
+    void emplace_blask(Args&&...);
     // function emplace_front; takes item constructor parameters
-    iterator emplace_front(iterator iter);
+    template <typename... Args>
+    void emplace_front(Args&&...);
 
     // function size();
     int size();
     // function empty();
     void empty();
     // function copy assignment overload;
-    const List& operator =(List&);
+    const List& operator =(List<T>&);
     // function move assignment overload;
-    List& operator =(List&&);
+    List& operator =(List<T>&&);
 private:
     class Node;
     Node *_head;
@@ -115,6 +119,7 @@ class List<T>::Node {
 public:
     Node(T item);
     Node* next();
+    Node* prev();
     void setNext(Node *node);
     T& key();
 private:
@@ -127,15 +132,15 @@ template <typename T>
 class List<T>::iterator {
 public:
     // Only need one constructor
-    List<T>::iterator(Node*);
+    iterator(Node*);
     // function prefix increment operator overload
-    List<T>::iterator operator++();
+    iterator operator++();
     // function postfix increment operator overload
-    const List<T>::iterator operator++(int);
+    const iterator operator++(int);
     // function prefix decrement operator overload
-    List<T>::iterator operator--();
+    iterator operator--();
     // function postfix decrement operator overload
-    const List<T>::iterator operator--(int);
+    const iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -157,15 +162,15 @@ template <typename T>
 class List<T>::reverse_iterator {
 public:
     // Only need one constructor
-    List<T>::reverse_iterator(Node *node);
+    reverse_iterator(Node *node);
     // function prefix increment operator overload
-    List<T>::reverse_iterator operator++();
+    reverse_iterator operator++();
     // function postfix increment operator overload
-    const List<T>::reverse_iterator operator++(int);
+    const reverse_iterator operator++(int);
     // function prefix decrement operator overload
-    List<T>::reverse_iterator operator--();
+    reverse_iterator operator--();
     // function postfix decrement operator overload
-    const List<T>::reverse_iterator operator--(int);
+    const reverse_iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -188,15 +193,15 @@ class List<T>::const_iterator
 {
 public:
     // Only need one constructor
-    List<T>::const_iterator(Node *node);
+    const_iterator(Node *node);
     // function prefix increment operator overload
-    List<T>::const_iterator operator++();
+    const_iterator operator++();
     // function postfix increment operator overload
-    const List<T>::const_iterator operator++(int);
+    const const_iterator operator++(int);
     // function prefix decrement operator overload
-    List<T>::const_iterator operator--();
+    const_iterator operator--();
     // function postfix decrement operator overload
-    const List<T>::const_iterator operator--(int);
+    const const_iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -211,22 +216,24 @@ public:
     }
 private:
     // Resource that iterator manages
-    List<T>::Node *_res;
+    Node *_res;
 };
+
+
 
 template <typename T>
 class List<T>::const_reverse_iterator {
 public:
     // Only need one constructor
-    List<T>::const_reverse_iterator(Node *node);
+    const_reverse_iterator(Node *node);
     // function prefix increment operator overload
-    List<T>::const_reverse_iterator operator++();
+    const_reverse_iterator operator++();
     // function postfix increment operator overload
-    const List<T>::const_reverse_iterator operator++(int);
+    const const_reverse_iterator operator++(int);
     // function prefix decrement operator overload
-    List<T>::const_reverse_iterator operator--();
+    const_reverse_iterator operator--();
     // function postfix decrement operator overload
-    const List<T>::const_reverse_iterator operator--(int);
+    const const_reverse_iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -241,69 +248,11 @@ public:
     }
 private:
     // Resource that iterator manages
-    List<T>::Node *_res;
+    Node *_res;
 };
 
 
 // CLASS IMPLEMENTATIONS BELOW
-
-
-template<typename T>
-List<T>::List() : _head(nullptr)
-{
-}
-
-template<typename T>
-List<T>::List(List & list)
-{
-}
-
-template<typename T>
-List<T>::List(List && list)
-{
-}
-
-template<typename T>
-List<T>::~List()
-{
-    if (_head) {
-        delete [] _head;
-    }
-}
-
-template<typename T>
-T &List<T>::front()
-{
-    return _head;
-}
-
-template<typename T>
-T &List<T>::front() const
-{
-    return _head;
-}
-
-template<typename T>
-T &List<T>::back()
-{
-    return _last;
-}
-
-template<typename T>
-T &List<T>::back() const
-{
-    return _last;
-}
-
-template<typename T>
-typename List<T>::iterator List<T>::begin() {
-    return iterator(_head);
-}
-
-template<typename T>
-typename List<T>::iterator List<T>::end() {
-    return iterator(nullptr);
-}
-
+#include "List.I"
 
 #endif

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="false">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b25e29b8-2064-4945-9a39-34f3ee6ecaa2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ascii/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ascii/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ascii/src/Items/Item.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ascii/src/Items/Item.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hm03/src/List.I" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm02/rel/hw02.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../hm02/rel/hw02.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/hm03.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../hm03/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/3.12.2/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/includes_CXX.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/linklibs.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/objects1.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/HW02.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/Progress/1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/Progress/count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/feature_tests.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/feature_tests.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/feature_tests.cxx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/HW02.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/makefile (DESKTOP-U1MP2VD's conflicted copy 2018-09-24)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/rel/Album.o" beforeDir="false" afterPath="$PROJECT_DIR$/../hm03/rel/Album.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/src/List.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../hm03/src/List.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hm03/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../hm03/src/main.cpp" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="819327181">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="820" />
+    <option name="y" value="177" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project Game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Project Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project Game" type="462c0819:PsiDirectoryNode" />
+              <item name="ascii" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hm03" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b25e29b8-2064-4945-9a39-34f3ee6ecaa2" name="Default Changelist" comment="" />
+      <created>1537979636869</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1537979636869</updated>
+      <workItem from="1537979637976" duration="609000" />
+      <workItem from="1539497626262" duration="31000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="640000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="LuaJ" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+</project>

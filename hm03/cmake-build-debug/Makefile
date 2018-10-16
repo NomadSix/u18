@@ -110,17 +110,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named HW02
+# Target rules for targets named hm03
 
 # Build rule for target.
-HW02: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 HW02
-.PHONY : HW02
+hm03: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 hm03
+.PHONY : hm03
 
 # fast build rule for target.
-HW02/fast:
-	$(MAKE) -f CMakeFiles\HW02.dir\build.make CMakeFiles/HW02.dir/build
-.PHONY : HW02/fast
+hm03/fast:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/build
+.PHONY : hm03/fast
+
+src/Album.obj: src/Album.cpp.obj
+
+.PHONY : src/Album.obj
+
+# target to build an object file
+src/Album.cpp.obj:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/Album.cpp.obj
+.PHONY : src/Album.cpp.obj
+
+src/Album.i: src/Album.cpp.i
+
+.PHONY : src/Album.i
+
+# target to preprocess a source file
+src/Album.cpp.i:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/Album.cpp.i
+.PHONY : src/Album.cpp.i
+
+src/Album.s: src/Album.cpp.s
+
+.PHONY : src/Album.s
+
+# target to generate assembly for a file
+src/Album.cpp.s:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/Album.cpp.s
+.PHONY : src/Album.cpp.s
+
+src/Rando.obj: src/Rando.cpp.obj
+
+.PHONY : src/Rando.obj
+
+# target to build an object file
+src/Rando.cpp.obj:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/Rando.cpp.obj
+.PHONY : src/Rando.cpp.obj
+
+src/Rando.i: src/Rando.cpp.i
+
+.PHONY : src/Rando.i
+
+# target to preprocess a source file
+src/Rando.cpp.i:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/Rando.cpp.i
+.PHONY : src/Rando.cpp.i
+
+src/Rando.s: src/Rando.cpp.s
+
+.PHONY : src/Rando.s
+
+# target to generate assembly for a file
+src/Rando.cpp.s:
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/Rando.cpp.s
+.PHONY : src/Rando.cpp.s
 
 src/main.obj: src/main.cpp.obj
 
@@ -128,7 +182,7 @@ src/main.obj: src/main.cpp.obj
 
 # target to build an object file
 src/main.cpp.obj:
-	$(MAKE) -f CMakeFiles\HW02.dir\build.make CMakeFiles/HW02.dir/src/main.cpp.obj
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/main.cpp.obj
 .PHONY : src/main.cpp.obj
 
 src/main.i: src/main.cpp.i
@@ -137,7 +191,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles\HW02.dir\build.make CMakeFiles/HW02.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -146,7 +200,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles\HW02.dir\build.make CMakeFiles/HW02.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles\hm03.dir\build.make CMakeFiles/hm03.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -155,9 +209,15 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... HW02
+	@echo ... hm03
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... src/Album.obj
+	@echo ... src/Album.i
+	@echo ... src/Album.s
+	@echo ... src/Rando.obj
+	@echo ... src/Rando.i
+	@echo ... src/Rando.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

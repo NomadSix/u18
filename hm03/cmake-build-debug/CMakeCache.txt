@@ -112,7 +112,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_GNUtoMS:BOOL=OFF
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/HW02
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/hm03
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/MinGW/bin/ld.exe
@@ -150,7 +150,7 @@ CMAKE_OBJCOPY:FILEPATH=C:/MinGW/bin/objcopy.exe
 CMAKE_OBJDUMP:FILEPATH=C:/MinGW/bin/objdump.exe
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=HW02
+CMAKE_PROJECT_NAME:STATIC=hm03
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/MinGW/bin/ranlib.exe
@@ -174,7 +174,7 @@ CMAKE_RC_FLAGS_RELEASE:STRING=
 CMAKE_RC_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_SH:FILEPATH=C:/cygwin64/bin/sh.exe
+CMAKE_SH:FILEPATH=CMAKE_SH-NOTFOUND
 
 //Flags used by the linker during the creation of shared libraries
 // during all build types.
@@ -233,10 +233,10 @@ CMAKE_STRIP:FILEPATH=C:/MinGW/bin/strip.exe
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-HW02_BINARY_DIR:STATIC=C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/cmake-build-debug
+hm03_BINARY_DIR:STATIC=C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/cmake-build-debug
 
 //Value Computed by CMake
-HW02_SOURCE_DIR:STATIC=C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03
+hm03_SOURCE_DIR:STATIC=C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03
 
 
 ########################
@@ -332,6 +332,8 @@ CMAKE_GENERATOR_TOOLSET:INTERNAL=
 CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MAKE_PROGRAM
+CMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
 CMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG
@@ -369,6 +371,8 @@ CMAKE_RC_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_RC_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Path to CMake installation.
 CMAKE_ROOT:INTERNAL=C:/Program Files/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.12
+//ADVANCED property for variable: CMAKE_SH
+CMAKE_SH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG

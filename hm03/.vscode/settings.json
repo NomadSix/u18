@@ -1,5 +1,16 @@
 {
     "files.associations": {
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "*.i": "cpp",
+        "array": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "unordered_map": "cpp",
+        "random": "cpp",
+        "type_traits": "cpp",
+        "algorithm": "cpp"
     }
 }
