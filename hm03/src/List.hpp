@@ -53,7 +53,7 @@ public:
     // function cbegin
     const_iterator cbegin() const;
     // function cend
-    const_iterator cend() const ;
+    const_iterator cend() const;
     // function crbegin
     const_reverse_iterator crbegin() const;
     // function crend
@@ -61,19 +61,19 @@ public:
 
     // function search; returns iterator
     // throws std::invalid_argument
-    iterator search(T);  //TODO arguments
+    iterator search(T);
 
     // function search; returns const_iterator
     // throws std::invalid_argument
-    const_iterator search(T) const;    //TODO arguments
+    const_iterator search(T) const;
 
     // function erase; returns iterator to one after what was erased
     // throws std::invalid_argument
-    iterator erase(T);   //TODO arguments
+    iterator erase(T);
 
     // function erase; overload that takes an iterator to what should be erased
     // throws std::invalid_argument
-    const_iterator erase(iterator it) const;   //TODO arguments
+    iterator erase(iterator it);
 
     // function insert; takes an iterator to position
     // where insertion occurs as well as item to insert,
@@ -90,32 +90,30 @@ public:
     // insertion occurs as well as item constructor parameters,
     // returns iterator to inserted item
     template <typename... Args>
-    iterator emplace(iterator pos, Args&&... args)
+    iterator emplace(iterator it, Args&&... args)
     {
-        if (_head) {
-            Node *item = searchHelper(pos);
-            pos.next(T(std::forward<Args>(args)...));
-        }
+        T tmp = T(std::forward<Args>(args)...);
+        return insert(it, tmp);
     }
 
     // function emplace_back; takes item constructor parameters
     template <typename... Args>
-    void emplace_blask(Args&&... args)
+    void emplace_back(Args&&... args)
     {
-        _last.next(T(std::forward<Args>(args)...));
+        emplace(iterator(_last), args...);
     }
 
     // function emplace_front; takes item constructor parameters
     template <typename... Args>
     void emplace_front(Args&&... args)
     {
-        _head.prev(T(std::forward<Args>(args)...));
+        emplace(begin(), args...);
     }
 
     // function size();
-    int size();
+    unsigned int size();
     // function empty();
-    void empty();
+    bool empty();
     // function copy assignment overload;
     const List& operator =(List<T>&);
     // function move assignment overload;
@@ -124,7 +122,7 @@ private:
     class Node;
     Node *_head;
     Node *_last;
-    Node *searchHelper(iterator loc) const;
+    Node *searchHelper(iterator loc);
     // Whatever data or helper functions you deem necessary
 };
 
@@ -135,6 +133,7 @@ public:
     Node* next();
     Node* prev();
     void setNext(Node *node);
+    void setPrev(Node *node);
     T& key();
 private:
     T *_res;
@@ -150,11 +149,11 @@ public:
     // function prefix increment operator overload
     iterator operator++();
     // function postfix increment operator overload
-    const iterator operator++(int);
+    iterator operator++(int);
     // function prefix decrement operator overload
     iterator operator--();
     // function postfix decrement operator overload
-    const iterator operator--(int);
+    iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -162,11 +161,21 @@ public:
     {
         return lhs._res == rhs._res;
     }
+    // function equivalency operator overload
+    friend bool operator==(const typename List<T>::iterator &lhs, typename List<T>::const_iterator &rhs)
+    {
+        return lhs._res == rhs.getRes();
+    }
     // function inequivalency operator overload
     friend bool operator!=(const typename List<T>::iterator &lhs, const typename List<T>::iterator &rhs)
     {
-        return !(lhs == rhs);
+        return lhs._res != rhs._res;
     }
+    // function assignment overload iterator
+    iterator operator =(const_iterator it);
+    iterator& operator+(int num);
+    T* pullPtr();
+    Node* getRes();
 private:
     // Resource that iterator manages
     List<T>::Node *_res;
@@ -180,11 +189,11 @@ public:
     // function prefix increment operator overload
     reverse_iterator operator++();
     // function postfix increment operator overload
-    const reverse_iterator operator++(int);
+    reverse_iterator operator++(int);
     // function prefix decrement operator overload
     reverse_iterator operator--();
     // function postfix decrement operator overload
-    const reverse_iterator operator--(int);
+    reverse_iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -211,11 +220,11 @@ public:
     // function prefix increment operator overload
     const_iterator operator++();
     // function postfix increment operator overload
-    const const_iterator operator++(int);
+    const_iterator operator++(int);
     // function prefix decrement operator overload
     const_iterator operator--();
     // function postfix decrement operator overload
-    const const_iterator operator--(int);
+    const_iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -228,6 +237,9 @@ public:
     {
         return lhs._res != rhs._res;
     }
+    const_iterator& operator+(int num);
+    const_iterator operator =(const_iterator it);
+    Node* getRes();
 private:
     // Resource that iterator manages
     Node *_res;
@@ -243,11 +255,11 @@ public:
     // function prefix increment operator overload
     const_reverse_iterator operator++();
     // function postfix increment operator overload
-    const const_reverse_iterator operator++(int);
+    const_reverse_iterator operator++(int);
     // function prefix decrement operator overload
     const_reverse_iterator operator--();
     // function postfix decrement operator overload
-    const const_reverse_iterator operator--(int);
+    const_reverse_iterator operator--(int);
     // function de-reference operator overlaod; l-value
     T& operator*();
     // function equivalency operator overload
@@ -260,6 +272,8 @@ public:
     {
         return lhs._res != rhs._res;
     }
+    const_reverse_iterator& operator+(int num);
+    const_reverse_iterator operator =(const_iterator it);
 private:
     // Resource that iterator manages
     Node *_res;
@@ -268,5 +282,9 @@ private:
 
 // CLASS IMPLEMENTATIONS BELOW
 #include "List.I"
+#include "Iterator.I"
+#include "Reverse_Iterator.I"
+#include "Const_Reverse_Iterator.I"
+#include "const_iterator.I"
 
 #endif

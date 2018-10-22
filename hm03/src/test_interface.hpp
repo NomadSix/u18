@@ -190,7 +190,7 @@ bool cpyConstr()
 
     List<int> two(one);
 
-    return two.size() == 3 && 
+    return two.size() == 3 &&
            two.front() == 45 && 
            two.back() == 42;
 }

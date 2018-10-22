@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/src/Album.cpp" "C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/cmake-build-debug/CMakeFiles/hm03.dir/src/Album.cpp.obj"
-  "C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/src/Rando.cpp" "C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/cmake-build-debug/CMakeFiles/hm03.dir/src/Rando.cpp.obj"
-  "C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/src/main.cpp" "C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hm03/cmake-build-debug/CMakeFiles/hm03.dir/src/main.cpp.obj"
+  "C:/code/u18/hw03/u18/hm03/src/Album.cpp" "C:/code/u18/hw03/u18/hm03/cmake-build-debug/CMakeFiles/hm03.dir/src/Album.cpp.obj"
+  "C:/code/u18/hw03/u18/hm03/src/Rando.cpp" "C:/code/u18/hw03/u18/hm03/cmake-build-debug/CMakeFiles/hm03.dir/src/Rando.cpp.obj"
+  "C:/code/u18/hw03/u18/hm03/src/main.cpp" "C:/code/u18/hw03/u18/hm03/cmake-build-debug/CMakeFiles/hm03.dir/src/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

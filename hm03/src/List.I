@@ -1,15 +1,20 @@
 //Default Constructor
 template<typename T>
-List<T>::List() : _head(nullptr), _last(nullptr)
+List<T>::List()
 {
+    _head = _last = nullptr;
 }
 
 // Constructor that takes first item
 template<typename T>
 List<T>::List(const T& item)
 {
-    Node* temp = new Node(item);
-    insert(iterator(_head, temp));
+//    Node *node = new Node(item);
+//    _head->setNext(node);
+//    node->setPrev(_head);
+//    node->setNext(_last);
+    _head = _last = nullptr;
+    push_front(item);
 }
 
 // Copy constructor
@@ -19,14 +24,17 @@ List<T>::List(const List& copy)
     if (copy._head == nullptr) {
         _head = _last = nullptr;
     } else {
-        _head = new Node(copy._head);
-        Node* tmpNext = copy._head->_next;
+        _head = new Node(copy._head->key());
+        Node* tmpCopy = copy._head;
         Node* tmp = _head;
 
-        while (tmpNext != nullptr) {
-            tmp->_next = new Node(tmpNext, nullptr, tmp);
-            tmp = tmp->_next;
-            //tmpOther = tmpOther->_next;
+        while (true) {
+            tmpCopy = tmpCopy->next();
+            if (!tmpCopy) break;
+            Node *tmpIn = new Node(tmpCopy->key());
+            tmpIn->setPrev(tmp);
+            tmp->setNext(tmpIn);
+            tmp = tmpIn;
         }
         _last = tmp;
     }
@@ -34,24 +42,23 @@ List<T>::List(const List& copy)
 
 // Move constructor
 template<typename T>
-List<T>::List(List &&move) 
+List<T>::List(List &&move)
 {
     _head = move._head;
     move._head = nullptr;
     _last = move._last;
     move._last = nullptr;
+    ~move();
 }
 
 // Destructor
 template<typename T>
 List<T>::~List()
 {
-    Node *temp = _head;
-
-    while (temp) {
-        Node* next = temp->_next;
-        delete temp;
-        temp = next;
+    while (_head) {
+        Node *tmp = _head;
+        _head = _head->next();
+        delete tmp;
     }
 }
 
@@ -59,28 +66,28 @@ List<T>::~List()
 template<typename T>
 T &List<T>::front()
 {
-    return _head;
+    return _head->key();
 }
 
 // function front; return by value
 template<typename T>
 T &List<T>::front() const
 {
-    return _head;
+    return _head->key();
 }
 
 // function back; l-value
 template<typename T>
 T &List<T>::back()
 {
-    return _last;
+    return _last->key();
 }
 
 // function back; return by value
 template<typename T>
 T &List<T>::back() const
 {
-    return _last;
+    return _last->key();
 }
 
 // function begin
@@ -94,7 +101,7 @@ typename List<T>::iterator List<T>::begin()
 template<typename T>
 typename List<T>::iterator List<T>::end()
 {
-    return iterator(_last);
+    return iterator(nullptr);
 }
 
 // function begin const overload
@@ -108,32 +115,32 @@ typename List<T>::const_iterator List<T>::begin() const
 template<typename T>
 typename List<T>::const_iterator List<T>::end() const
 {
-    return const_iterator(_last);
+    return const_iterator(nullptr);
 }
 
 // function rbegin
 template<typename T>
 typename List<T>::reverse_iterator List<T>::rbegin()
 {
-    return reverse_iterator(_head);
+    return reverse_iterator(_last);
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::rbegin() const
 {
-    return const_reverse_iterator(_head);
+    return const_reverse_iterator(_last);
 }
 
 template<typename T>
 typename List<T>::reverse_iterator List<T>::rend()
 {
-    return reverse_iterator(_last);
+    return reverse_iterator(nullptr);
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::rend() const
 {
-    return const_reverse_iterator(_last);
+    return const_reverse_iterator(nullptr);
 }
 
 template<typename T>
@@ -145,118 +152,148 @@ typename List<T>::const_iterator List<T>::cbegin() const
 template<typename T>
 typename List<T>::const_iterator List<T>::cend() const
 {
-    return const_iterator(_last);
+    return const_iterator(nullptr);
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::crbegin() const
 {
-    return const_reverse_iterator(_head);
+    return const_reverse_iterator(_last);
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::crend() const
 {
-    return const_reverse_iterator(_last);
+    return const_reverse_iterator(nullptr);
 }
 
 template<typename T>
 typename List<T>::iterator List<T>::search(T item)
 {
-    auto it = iterator();
-    Node *tmp = _head;
-    Node *temp = new Node(item);
-
-    while (tmp != temp) {
-        it++;
-        tmp->next();
+    for (auto in = begin(); in != end(); in++) {
+        if (*in == item)
+            return in;
     }
-    return it;
+    throw std::invalid_argument("search term not in list");
 }
 
 template<typename T>
 typename List<T>::const_iterator List<T>::search(T item) const
 {
-    auto it = const_iterator();
-    Node *tmp = _head;
-    Node *temp = new Node(item);
-
-    while (tmp != temp) {
-        it++;
-        tmp->next();
+    for (auto in = cbegin(); in != cend(); in++) {
+        if (*in == item)
+            return in;
     }
-    return it;
+    throw std::invalid_argument("search term not in list");
 }
 
 template<typename T>
 typename List<T>::iterator List<T>::erase(T item)
 {
-    auto it = begin();
-    for(it; it != end();) {
-        if (++it == item) {
-            it._M_invalidate();
+    iterator it = begin();
+    for (it = begin(); it != _last; ++it) {
+        if (*it == item) {
+            //change prev and next
+            Node* tmp = it.getRes();
+            if (tmp->next()) tmp->next()->setPrev(tmp->prev());
+            if (tmp->prev()) tmp->prev()->setNext(tmp->next());
+            auto tore = iterator(tmp->next());
+            delete tmp;
+            return tore;
         }
     }
-    return it;
+    throw std::invalid_argument("erase term not in list");
 }
 
 template<typename T>
-typename List<T>::const_iterator List<T>::erase(List<T>::iterator it) const
+typename List<T>::iterator List<T>::erase(iterator it)
 {
-    iterator pos = begin();
-    for (pos; pos != it; ) {
-        if (++pos == it) {
-            pos._M_invalidate();
-            break;
+    for (iterator i = begin(); i != end(); i++) {
+        if (i == it) {
+            Node* tmp = it.getRes();
+            if (tmp->next())
+                tmp->next()->setPrev(tmp->prev());
+            else
+                _last = tmp->prev();
+            if (tmp->prev())
+                tmp->prev()->setNext(tmp->next());
+            else
+                _head = tmp->next();
+            auto toReturn = tmp->next();
+            delete tmp;
+            return iterator(toReturn);
         }
     }
-    return pos;
+    throw std::invalid_argument("item not in list");
 }
 
 template<typename T>
 void List<T>::push_back(T item)
 {
-    if (!_head) {
-        Node *tmp = new Node(item);
-        _head = tmp;
+    if (_last == nullptr) {
+        push_front(item);
     } else {
-        Node *tmp = _head;
-        while (tmp->next() != nullptr) {
-            tmp = tmp->next();
-        }
-
-        Node *in = new Node(item);
-        tmp->setNext(in);
+        insert(_last, item);
     }
 }
 
 template<typename T>
 void List<T>::push_front(T item)
 {
-    if (!_head) {
-        Node *tmp = new Node(item);
-        _head = tmp;
+    Node *in = new Node(item);
+    if (_head == nullptr) {
+        _head = _last = in;
+        in->setPrev(nullptr);
+        in->setNext(nullptr);
     } else {
-        Node *in = new Node(item);
-        _head.prev(in);
+        //insert(begin(), in->key());
+        in->setNext(_head);
+        _head = in;
     }
 }
 
 template<typename T>
-int List<T>::size() 
+typename List<T>::iterator List<T>::insert(iterator loc, T item)
 {
-    int size = 0;
-    Node temp = _head;
-    while (temp != nullptr) {
-        size++;
-        temp = temp.next();
+    Node *in = new Node(item);
+    if (!_head) {
+        _head = _last = in;
+        return iterator(_head);
     }
+    //Node *pos = searchHelper(loc);
+    Node *pos = loc.getRes();
+    if (pos->next() == nullptr) {
+        in->setNext(nullptr);
+        _last = in;
+    } else {
+        in->setNext(pos->next());
+        pos->next()->setPrev(in);
+    }
+    in->setPrev(pos);
+    pos->setNext(in);
+
+    return iterator(pos->next());
+}
+
+template<typename T>
+unsigned int List<T>::size()
+{
+    if (!_head)
+        return 0;
+    unsigned int size = 0;
+    Node *temp = _head;
+    while (temp) {
+        size++;
+        if (temp)
+            temp = temp->next();
+    }
+//    delete temp;
     return size;
 }
 
 // checks if list is empty
 template<typename T>
-void List<T>::empty()
+bool List<T>::empty()
 {
     return _head == nullptr;
 }
@@ -268,7 +305,7 @@ const List<T>& List<T>::operator=(List<T>& list)
     if (this == &list) {
         return *this;
     }
-    ~List();
+    delete this;
     new(this) List(list);
     return *this;
 }
@@ -280,61 +317,27 @@ List<T>& List<T>::operator=(List<T>&& list)
     if (this == &list) {
         return *this;
     }
-    _head = nullptr;
-    _last = nullptr;
-    swap(*this, list);
+    _head = list._head;
+    _last = list._last;
+    //~list();
     return *this;
 }
 
-// function assignment overload iterator
-//template<typename T>
-//typename List<T>::iterator List<T>::iterator::operator =(const_iterator it)
-//{
-//
-//    return iterator(it);
-//}
-
 template<typename T>
-typename List<T>::iterator List<T>::insert(iterator loc, T item)
+typename List<T>::Node *List<T>::searchHelper(iterator loc)
 {
-    Node *in = new Node(item);
-
-    if (_head) {
-        Node *pos = searchHelper(loc);
-        Node *prev = _head;
-
-        while (prev->next() == pos && prev->next() == nullptr) {
-            prev = prev->next();
-        }
-
-        in->setNext(pos);
-        prev->setNext(in);
-    } else {
-        _head = in;
-    }
-}
-
-
-
-template<typename T>
-typename List<T>::Node* List<T>::searchHelper(typename List<T>::iterator loc) const
-{
-    Node *tmp = _head;
-
-    while (tmp != nullptr && tmp != loc) {
-        if (tmp == loc) {
-            break;
-        } else {
-            tmp = tmp->next();
+    for (iterator it = begin(); it != end(); it++) {
+        if (it == loc) {
+            return  it.getRes();
         }
     }
-    return tmp;
+    return nullptr;
 }
 
 // Node member functions
 
 template <typename T>
-List<T>::Node::Node(T item) : _res(new T(item)), _next(nullptr)
+List<T>::Node::Node(T item) : _res(new T(item)), _next(nullptr), _prev(nullptr)
 {
 }
 
