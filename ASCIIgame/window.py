@@ -10,25 +10,24 @@ class window:
         self.libtcod = libtcod
         libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
         libtcod.console_init_root(self.width, self.height, 'Hello World', False)
-        self.con = libtcod.console_new(self.width + 10, self.height)
+        self.con = libtcod.console_new(self.width, self.height)
         self.batch = batch(self.con, libtcod)
         self.loadcontent()
 
 
     def loadcontent(self):
-        map = [[ Tile(False)
+        self.map = [[ Tile(False)
         for y in range(self.height) ]
             for x in range(self.width) ]
 
         #place two pillars to test the map
-        map[30][22].blocked = True
-        map[30][22].block_sight = True
-        map[49][22].blocked = True
-        map[49][22].block_sight = True
-
+        self.map[30][22].blocked = True
+        self.map[30][22].block_sight = True
+        self.map[49][22].blocked = True
+        self.map[49][22].block_sight = True
         for y in range(self.height):
             for x in range(self.width):
-                wall = map[x][y].block_sight
+                wall = self.map[x][y].block_sight
                 if wall:
                     self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
                 else:
@@ -59,7 +58,7 @@ class window:
         while not self.libtcod.console_is_window_closed():
             self.update()
             self.batch.draw()
-            self.libtcod.console_blit(self.con, 0, 0, self.height, self.width, 0, 0, 0)
+            self.libtcod.console_blit(self.con, 0, 0, self.width, self.height, 0, 0, 0)
             self.libtcod.console_flush()
             self.batch.clear()
             exit = self.handle_keys()
