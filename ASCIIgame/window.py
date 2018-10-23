@@ -2,6 +2,7 @@ from batch import batch
 from obj import obj
 from player import player
 from tile import Tile
+from random import *
 
 class window:
     def __init__(self, width, height, libtcod):
@@ -11,6 +12,7 @@ class window:
         libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
         libtcod.console_init_root(self.width, self.height, 'Hello World', False)
         self.con = libtcod.console_new(self.width, self.height)
+        self.title = libtcod.console_new(self.width, self.height)
         self.batch = batch(self.con, libtcod)
         self.loadcontent()
 
@@ -19,9 +21,9 @@ class window:
         for y in range(self.height) ]
             for x in range(self.width) ]
 
-        #place two pillars to test the map
-        self.map[32][24].block_sight = True
-        self.map[49][22].block_sight = True
+        for n in range(300):
+                self.map[randrange(0, self.width)][randrange(0, self.height)].block_sight = True
+
         for y in range(self.height):
             for x in range(self.width):
                 wall = self.map[x][y].block_sight
@@ -44,14 +46,14 @@ class window:
         if self.libtcod.console_is_key_pressed(self.libtcod.KEY_UP):
             if map[loc[0]][loc[1]-1].block_sight == False:
                 self.char.handle_keys(0, -1)
+            
+        elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_LEFT):
+            if map[loc[0]-1][loc[1]].block_sight == False:
+                self.char.handle_keys(-1, 0)
 
         elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_DOWN):
             if map[loc[0]][loc[1]+1].block_sight == False:
                 self.char.handle_keys(0, 1)
-
-        elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_LEFT):
-            if map[loc[0]-1][loc[1]].block_sight == False:
-                self.char.handle_keys(-1, 0)
 
         elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_RIGHT):
             if map[loc[0]+1][loc[1]].block_sight == False:
