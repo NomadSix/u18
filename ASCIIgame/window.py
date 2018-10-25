@@ -5,6 +5,7 @@ from tile import Tile
 from random import *
 
 class window:
+    enumerate
     def __init__(self, width, height, libtcod):
         self.width = width
         self.height = height
@@ -14,23 +15,13 @@ class window:
         self.con = libtcod.console_new(self.width, self.height)
         self.title = libtcod.console_new(self.width, self.height)
         self.batch = batch(self.con, libtcod)
+        self.numWalls = 0
         self.loadcontent()
 
     def loadcontent(self):
         self.map = [[ Tile(False)
         for y in range(self.height) ]
             for x in range(self.width) ]
-
-        for n in range(300):
-                self.map[randrange(0, self.width)][randrange(0, self.height)].block_sight = True
-
-        for y in range(self.height):
-            for x in range(self.width):
-                wall = self.map[x][y].block_sight
-                if wall:
-                    self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
-                else:
-                    self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
         objs = []
         self.char = player(self.width / 2, self.height / 2, '@', self.libtcod.amber)
         objs.append(self.char)
@@ -61,10 +52,24 @@ class window:
         
         if key.vk == self.libtcod.KEY_ESCAPE:
             return True  #exit game
+        
+        self.numWalls = self.numWalls + 1
 
     def update(self):
-        pass
+        for n in range(self.numWalls):
+            self.map[randrange(0, self.width)][randrange(0, self.height)].block_sight = True
 
+        for y in range(self.height):
+            for x in range(self.width):
+                wall = self.map[x][y].block_sight
+                if wall:
+                    self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
+                else:
+                    self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
+        for y in range(self.height):
+            for x in range(self.width):
+                wall = self.map[x][y].block_sight = False
+ 
     def draw(self):
         while not self.libtcod.console_is_window_closed():
             self.update()
