@@ -12,9 +12,10 @@ class window:
         self.libtcod = libtcod
         libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
         libtcod.console_init_root(self.width, self.height, 'Hello World', False)
-        self.con = libtcod.console_new(self.width, self.height)
+        self.game = libtcod.console_new(self.width - 15, self.height)
+        self.inventory = libtcod.console_new(self.width, self.height)
         self.title = libtcod.console_new(self.width, self.height)
-        self.batch = batch(self.con, libtcod)
+        self.batch = batch(self.game, libtcod)
         self.numWalls = 0
         self.loadcontent()
 
@@ -63,9 +64,9 @@ class window:
             for x in range(self.width):
                 wall = self.map[x][y].block_sight
                 if wall:
-                    self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
                 else:
-                    self.libtcod.console_set_char_background(self.con, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
         for y in range(self.height):
             for x in range(self.width):
                 wall = self.map[x][y].block_sight = False
@@ -74,7 +75,7 @@ class window:
         while not self.libtcod.console_is_window_closed():
             self.update()
             self.batch.draw()
-            self.libtcod.console_blit(self.con, 0, 0, self.width, self.height, 0, 0, 0)
+            self.libtcod.console_blit(self.game, 0, 0, self.width + 15, self.height, 0, 0, 0)
             self.libtcod.console_flush()
             self.batch.clear()
             exit = self.handle_keys(self.map)
