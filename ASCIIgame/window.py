@@ -17,16 +17,16 @@ class window:
         self.batch = batch(self.game, libtcod)
         self.numWalls = 100
         self.gamestate = "Title"
+        self.objs = []
         self.loadcontent()
 
     def loadcontent(self):
         self.map = [[ Tile(False)
         for y in range(self.height) ]
             for x in range(self.width) ]
-        objs = []
         self.char = player(randrange(1, self.width - 16), randrange(1, self.height - 1), '@', self.libtcod.amber)
-        objs.append(self.char)
-        for objd in objs:
+        self.objs.append(self.char)
+        for objd in self.objs:
             self.batch.add(objd)
         for n in range(self.numWalls):
             self.map[randrange(1, self.width - 16)][randrange(1, self.height - 1)].block_sight = True
@@ -81,6 +81,7 @@ class window:
                 return True
         if key.vk == self.libtcod.KEY_ESCAPE:
             self.gamestate = "Title"
+            self.loadcontent()
             
         
         self.numWalls = self.numWalls + 1
@@ -94,10 +95,10 @@ class window:
             if self.gamestate == "Title":
                 output = "ASCII GAME 2018 CS400"
                 x = self.width / 2 - len(output) / 2
-                y = self.height / 2 - 10
+                y = self.height / 2 - 7
                 self.batch.printStr(self.title, x, y, output, self.libtcod.white)
                 output = "1. Start"
-                y = y + 15
+                y = y + 5
                 self.batch.printStr(self.title, x, y, output, self.libtcod.white)
                 output = "2. Controls"
                 y = y + 2
@@ -107,11 +108,26 @@ class window:
                 self.batch.printStr(self.title, x, y, output, self.libtcod.white)
                 self.libtcod.console_blit(self.title, 0, 0, self.width, self.height, 0, 0, 0)
             elif self.gamestate == "Controls":
-                output = "UP_ARROW"
+                output = "CONTROLS"
                 x = self.width / 2 - len(output) / 2
                 y = self.height / 2 - 10
-                self.batch.printStr(self.title, x, y, output, self.libtcod.white)
-                
+                self.batch.printStr(self.controls, x, y, output, self.libtcod.white)
+                output = "ESCAPE - Returns the player to the title screen"
+                x = x - 18
+                y = y + 6
+                self.batch.printStr(self.controls, x, y, output, self.libtcod.white)
+                output = "UP_ARROW - up by one unit"
+                y = y + 2
+                self.batch.printStr(self.controls, x, y, output, self.libtcod.white)
+                output = "UP_LEFT - left by one unit"
+                y = y + 2
+                self.batch.printStr(self.controls, x, y, output, self.libtcod.white)
+                output = "UP_DOWN - down by one unit"
+                y = y + 2
+                self.batch.printStr(self.controls, x, y, output, self.libtcod.white)
+                output = "UP_RIGHT - right by one unit"
+                y = y + 2
+                self.batch.printStr(self.controls, x, y, output, self.libtcod.white)
                 self.libtcod.console_blit(self.controls, 0, 0, self.width, self.height, 0, 0, 0)
             elif self.gamestate == "Game":
                 self.update()
