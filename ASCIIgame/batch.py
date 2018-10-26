@@ -24,4 +24,9 @@ class batch():
         for obj in self.objects:
             self.libtcod.console_set_default_foreground(self.con, obj.color)
             self.libtcod.console_put_char(self.con, obj.x, obj.y, obj.char)
+    
+    def printStr(self, con, x, y, string, color):
+        self.libtcod.console_set_default_foreground(con, color)
+        for n in range(0, len(string)):
+            self.libtcod.console_put_char(con, x + n, y, string[n])
         
