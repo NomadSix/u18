@@ -1,0 +1,3 @@
+C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hw04/cmake-build-debug/CMakeFiles/hw04.dir
+C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hw04/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hw04/cmake-build-debug/CMakeFiles/rebuild_cache.dir

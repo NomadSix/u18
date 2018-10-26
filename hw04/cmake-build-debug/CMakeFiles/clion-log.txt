@@ -1,0 +1,16 @@
+"C:\Program Files\JetBrains\CLion 2018.2.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04"
+-- Configuring done
+CMake Error at CMakeLists.txt:10 (add_executable):
+  Cannot find source file:
+
+    src/Rando.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at CMakeLists.txt:10 (add_executable):
+  No SOURCES given to target: hm03
+
+
+-- Build files have been written to: C:/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hw04/cmake-build-debug
