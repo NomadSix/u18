@@ -9,7 +9,6 @@ Cool Game idea from Autumn
 - fun
 - it looks like you are running really fast
 - i see a cactus that is bent all weird
-- the player does coke for the first time and picks things up and puts them back down getting distracted
-- pet me
-- pet me more
 - thanks
+- you pick up slime that give you poits and we can have many diffrent kinds (colors)
+- sell slime at the end of each room diffrent colors diffrent price
