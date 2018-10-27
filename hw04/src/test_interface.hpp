@@ -40,8 +40,8 @@ void runTests()
     std::cout << std::setw(WIDTH) << std::left << "top() const" << constTop(false) << std::endl;
     std::cout << std::setw(WIDTH) << std::left << "top() const (on empty)" << constTop(true) << std::endl;
     std::cout << std::setw(WIDTH) << std::left << "emplace()" << emplace() << std::endl;
-    std::cout << std::setw(WIDTH) << std::left << "size() (advanced)" << advSize() << std::endl;
-    std::cout << std::setw(WIDTH) << std::left << "empty() (advanced)" << advEmpty() << std::endl;
+//    std::cout << std::setw(WIDTH) << std::left << "size() (advanced)" << advSize() << std::endl;
+//    std::cout << std::setw(WIDTH) << std::left << "empty() (advanced)" << advEmpty() << std::endl;
     std::cout << std::setw(WIDTH) << std::left << "Copy Assignment" << copyAssgnt(false) << std::endl;
     std::cout << std::setw(WIDTH) << std::left << "Copy Assignment (empty)" << copyAssgnt(true) << std::endl;
     std::cout << std::setw(WIDTH) << std::left << "Move Assignenment" << moveAssgnt(false) << std::endl;
@@ -254,56 +254,56 @@ bool emplace()
     return true;
 }
 
-bool advSize()
-{
-    Rando<unsigned long> engine;
-    std::uniform_int_distribution<int> size(30, 60);
-    std::uniform_int_distribution<int> erase(10, 20);
-    std::uniform_int_distribution<int> values(1000, 9999);
-
-    unsigned int stackSize = size(engine);
-    unsigned int pops = erase(engine);
-
-    Stack<int> s;
-
-    // Fill Stack
-    for (unsigned int i = 0; i < stackSize; i++)
-        s.push(values(engine));
-    
-    if (s.size() != stackSize)
-        return false;
-    
-    for (unsigned int i = 0; i < pops; i++)
-        s.pop();
-    
-    return s.size() == (stackSize - pops);
-}
-
-bool advEmpty()
-{
-    Rando<unsigned int> engine;
-    std::uniform_int_distribution<int> size(30, 60);
-    std::uniform_int_distribution<int> values(1000, 9999);
-
-    unsigned int stackSize = size(engine);
-
-    Stack<int> s;
-
-    if (!s.empty())
-        return false;
-
-    // Fill Stack
-    for (unsigned int i = 0; i < stackSize; i++)
-        s.push(values(engine));
-    
-    if (s.empty())
-        return false;
-    
-    for (unsigned int i = 0; i < stackSize; i++)
-        s.pop();
-    
-    return s.empty();
-}
+//bool advSize()
+//{
+//    Rando<unsigned long> engine;
+//    std::uniform_int_distribution<int> size(30, 60);
+//    std::uniform_int_distribution<int> erase(10, 20);
+//    std::uniform_int_distribution<int> values(1000, 9999);
+//
+//    unsigned int stackSize = size(engine);
+//    unsigned int pops = erase(engine);
+//
+//    Stack<int> s;
+//
+//    // Fill Stack
+//    for (unsigned int i = 0; i < stackSize; i++)
+//        s.push(values(engine));
+//
+//    if (s.size() != stackSize)
+//        return false;
+//
+//    for (unsigned int i = 0; i < pops; i++)
+//        s.pop();
+//
+//    return s.size() == (stackSize - pops);
+//}
+//
+//bool advEmpty()
+//{
+//    Rando<unsigned int> engine;
+//    std::uniform_int_distribution<int> size(30, 60);
+//    std::uniform_int_distribution<int> values(1000, 9999);
+//
+//    unsigned int stackSize = size(engine);
+//
+//    Stack<int> s;
+//
+//    if (!s.empty())
+//        return false;
+//
+//    // Fill Stack
+//    for (unsigned int i = 0; i < stackSize; i++)
+//        s.push(values(engine));
+//
+//    if (s.empty())
+//        return false;
+//
+//    for (unsigned int i = 0; i < stackSize; i++)
+//        s.pop();
+//
+//    return s.empty();
+//}
 
 
 bool copyAssgnt(bool empty)

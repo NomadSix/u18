@@ -110,44 +110,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named hw04
+# Target rules for targets named hm04
 
 # Build rule for target.
-hw04: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 hw04
-.PHONY : hw04
+hm04: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 hm04
+.PHONY : hm04
 
 # fast build rule for target.
-hw04/fast:
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/build
-.PHONY : hw04/fast
+hm04/fast:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/build
+.PHONY : hm04/fast
 
-main.obj: main.cpp.obj
+src/Album.obj: src/Album.cpp.obj
 
-.PHONY : main.obj
+.PHONY : src/Album.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+src/Album.cpp.obj:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/src/Album.cpp.obj
+.PHONY : src/Album.cpp.obj
 
-main.i: main.cpp.i
+src/Album.i: src/Album.cpp.i
 
-.PHONY : main.i
+.PHONY : src/Album.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/Album.cpp.i:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/src/Album.cpp.i
+.PHONY : src/Album.cpp.i
 
-main.s: main.cpp.s
+src/Album.s: src/Album.cpp.s
 
-.PHONY : main.s
+.PHONY : src/Album.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/Album.cpp.s:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/src/Album.cpp.s
+.PHONY : src/Album.cpp.s
+
+src/main.obj: src/main.cpp.obj
+
+.PHONY : src/main.obj
+
+# target to build an object file
+src/main.cpp.obj:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -155,12 +182,15 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... hw04
+	@echo ... hm04
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... src/Album.obj
+	@echo ... src/Album.i
+	@echo ... src/Album.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
 .PHONY : help
 
 

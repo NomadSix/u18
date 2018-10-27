@@ -1,3 +1,8 @@
 
 ASCIIgame/libtcodpy/__init__.pyc
 *.pyc
+*.o
+*.make
+*.obj
+*.cbp
+*.rsp

@@ -10,9 +10,9 @@ public:
     // default constructor
     Stack();
     // parameterized constructor that takes first item
-    Stack(const T& item);
+    Stack(T item);
     // copy constructor
-    Stack(const Stack &copy);
+    Stack(Stack &copy);
     // move constructor
     Stack(Stack &&move);
     // destructor
@@ -25,13 +25,13 @@ public:
     unsigned int size() const noexcept;
 
     // function top; l-value; throws underflow if stack is empty
-    T& top();
+    T top();
 
     // function top; read-only; throws underflow if stack is empty
-    const T& top() const;
+    const T top() const;
 
     // function push; does not throw exceptions
-    void push(const T& val) noexcept;
+    void push(T val) noexcept;
 
     // function emplace; does not throw exceptions
     template <class... Args>
@@ -41,19 +41,19 @@ public:
     void pop();
 
     // copy assignment operator overload
-    const Stack&operator =(Stack&);
+    const Stack&operator =(Stack& copy);
 
     // move assignment operator overload
-    Stack&operator =(Stack&&);
+    Stack&operator =(Stack&& move);
 private:
     // Private data
-    List<T> array;
+    List<T*> array;
 };
 
 
 
 // STACK FUNCTIONS
-
+#include "Stack.i"
 
 
 #endif

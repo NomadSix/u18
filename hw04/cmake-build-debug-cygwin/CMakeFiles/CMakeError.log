@@ -1,0 +1,20 @@
+Determining if the C compiler works failed with the following output:
+Change Dir: /cygdrive/c/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hw04/cmake-build-debug-cygwin/CMakeFiles/CMakeTmp
+
+Run Build Command:"/cygdrive/c/Program Files (x86)/GnuWin32/bin/make.exe" "cmTC_c042b/fast"
+C:/Program Files (x86)/GnuWin32/bin/make -f CMakeFiles/cmTC_c042b.dir/build.make CMakeFiles/cmTC_c042b.dir/build
+/usr/bin/sh: -c: line 0: syntax error near unexpected token `('
+/usr/bin/sh: -c: line 0: `C:/Program Files (x86)/GnuWin32/bin/make -f CMakeFiles/cmTC_c042b.dir/build.make CMakeFiles/cmTC_c042b.dir/build'
+make: *** [cmTC_c042b/fast] Error 1
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /cygdrive/c/Users/Devon/Dropbox/2018 SCHOOL/CS/u18/hw04/cmake-build-debug-cygwin/CMakeFiles/CMakeTmp
+
+Run Build Command:"/cygdrive/c/Program Files (x86)/GnuWin32/bin/make.exe" "cmTC_f77f5/fast"
+C:/Program Files (x86)/GnuWin32/bin/make -f CMakeFiles/cmTC_f77f5.dir/build.make CMakeFiles/cmTC_f77f5.dir/build
+/usr/bin/sh: -c: line 0: syntax error near unexpected token `('
+/usr/bin/sh: -c: line 0: `C:/Program Files (x86)/GnuWin32/bin/make -f CMakeFiles/cmTC_f77f5.dir/build.make CMakeFiles/cmTC_f77f5.dir/build'
+make: *** [cmTC_f77f5/fast] Error 1
+
+

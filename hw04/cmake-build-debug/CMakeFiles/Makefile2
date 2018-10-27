@@ -64,39 +64,39 @@ CMAKE_SOURCE_DIR = "C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04"
 CMAKE_BINARY_DIR = "C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04\cmake-build-debug"
 
 #=============================================================================
-# Target rules for target CMakeFiles/hw04.dir
+# Target rules for target CMakeFiles/hm04.dir
 
 # All Build rule for target.
-CMakeFiles/hw04.dir/all:
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/depend
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target hw04"
-.PHONY : CMakeFiles/hw04.dir/all
+CMakeFiles/hm04.dir/all:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/depend
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04\cmake-build-debug\CMakeFiles" --progress-num=1,2,3 "Built target hm04"
+.PHONY : CMakeFiles/hm04.dir/all
 
 # Include target in all.
-all: CMakeFiles/hw04.dir/all
+all: CMakeFiles/hm04.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/hw04.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04\cmake-build-debug\CMakeFiles" 2
-	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/hw04.dir/all
+CMakeFiles/hm04.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04\cmake-build-debug\CMakeFiles" 3
+	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/hm04.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\Devon\Dropbox\2018 SCHOOL\CS\u18\hw04\cmake-build-debug\CMakeFiles" 0
-.PHONY : CMakeFiles/hw04.dir/rule
+.PHONY : CMakeFiles/hm04.dir/rule
 
 # Convenience name for target.
-hw04: CMakeFiles/hw04.dir/rule
+hm04: CMakeFiles/hm04.dir/rule
 
-.PHONY : hw04
-
-# clean rule for target.
-CMakeFiles/hw04.dir/clean:
-	$(MAKE) -f CMakeFiles\hw04.dir\build.make CMakeFiles/hw04.dir/clean
-.PHONY : CMakeFiles/hw04.dir/clean
+.PHONY : hm04
 
 # clean rule for target.
-clean: CMakeFiles/hw04.dir/clean
+CMakeFiles/hm04.dir/clean:
+	$(MAKE) -f CMakeFiles\hm04.dir\build.make CMakeFiles/hm04.dir/clean
+.PHONY : CMakeFiles/hm04.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/hm04.dir/clean
 
 .PHONY : clean
 

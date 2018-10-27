@@ -6,7 +6,7 @@
 
 ### Compiler variables
 CXX = g++
-CXXFLAGS = -Wall -std=c++11 -Wpedantic
+CXXFLAGS = -Wall -std=c++11
 EXE = hw02
 
 ### Source variables
