@@ -5,4 +5,5 @@ ASCIIgame/libtcodpy/__init__.pyc
 *.make
 *.obj
 *.cbp
+*.exe
 *.rsp
