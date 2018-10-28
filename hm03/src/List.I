@@ -305,8 +305,15 @@ const List<T>& List<T>::operator=(List<T>& list)
     if (this == &list) {
         return *this;
     }
-    delete this;
-    new(this) List(list);
+    while (_head) {
+        Node *tmp = _head;
+        _head = _head->next();
+        delete tmp;
+    }
+    while (list._head) {
+        push_back(list._head->key());
+        list._head = list._head->next();
+    }
     return *this;
 }
 

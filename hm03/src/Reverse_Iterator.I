@@ -15,7 +15,7 @@ template <typename T>
 typename List<T>::reverse_iterator List<T>::reverse_iterator::operator++(int num)
 {
     reverse_iterator tmp = *this;
-    --(*this);
+    ++(*this);
 
     return tmp;
 }
@@ -31,7 +31,7 @@ template <typename T>
 typename List<T>::reverse_iterator List<T>::reverse_iterator::operator--(int num)
 {
     reverse_iterator tmp = *this;
-    ++(*this);
+    --(*this);
 
     return tmp;
 }
