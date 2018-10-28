@@ -7,3 +7,4 @@ ASCIIgame/libtcodpy/__init__.pyc
 *.cbp
 *.exe
 *.rsp
+*.o
