@@ -15,7 +15,7 @@ class window:
         self.title = libtcod.console_new(self.width, self.height)
         self.controls = libtcod.console_new(self.width, self.height)
         self.batch = batch(self.game, libtcod)
-        self.numWalls = 100
+        self.numWalls = 30
         self.gamestate = "Title"
         self.objs = []
         self.loadcontent()
@@ -28,8 +28,10 @@ class window:
         self.objs.append(self.char)
         for objd in self.objs:
             self.batch.add(objd)
+        
+        # places random walls for 
         for n in range(self.numWalls):
-            self.map[randrange(1, self.width - 16)][randrange(1, self.height - 1)].block_sight = True
+            self.map[randrange(1, self.width - 14)][randrange(1, self.height - 1)].block_sight = True
         
         for y in range(self.height):
             for x in range(self.width):
@@ -48,7 +50,7 @@ class window:
                 else:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
                 if wall.black:
-                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 0), self.libtcod.BKGND_SET )
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 0,), self.libtcod.BKGND_SET )
 
     def changeFont(self, path):
         self.libtcod.console_set_custom_font(path, self.libtcod.FONT_TYPE_GREYSCALE | self.libtcod.FONT_LAYOUT_TCOD)
@@ -81,16 +83,11 @@ class window:
                 return True
         if key.vk == self.libtcod.KEY_ESCAPE:
             self.gamestate = "Title"
-            self.loadcontent()
-            
-        
-        self.numWalls = self.numWalls + 1
 
     def update(self):
         pass
  
     def draw(self):
-        
         while not self.libtcod.console_is_window_closed():
             if self.gamestate == "Title":
                 output = "ASCII GAME 2018 CS400"
@@ -132,7 +129,19 @@ class window:
             elif self.gamestate == "Game":
                 self.update()
                 self.batch.draw()
-                self.libtcod.console_blit(self.game, 0, 0, self.width + 15, self.height, 0, 0, 0)
+                self.libtcod.console_blit(self.game, 0, 0, self.width, self.height, 0, 0, 0)
+                y = 5
+                self.batch.printStr(self.game, self.width - 13, y, str(self.char.name), self.libtcod.white)
+                y = y + 2
+                self.batch.printStr(self.game, self.width - 13, y, 'Str - ' + str(self.char.strength), self.libtcod.white)
+                y = y + 2
+                self.batch.printStr(self.game, self.width - 13, y, 'Dex - ' + str(self.char.dexterity), self.libtcod.white)
+                y = y + 2
+                self.batch.printStr(self.game, self.width - 13, y, 'Int - ' + str(self.char.intelligence), self.libtcod.white)
+                y = y + 2
+                self.batch.printStr(self.game, self.width - 13, y, 'Wis - ' + str(self.char.wisdom), self.libtcod.white)
+                y = y + 2
+                self.batch.printStr(self.game, self.width - 13, y, 'Chr - ' + str(self.char.charisma), self.libtcod.white)
                 self.batch.clear()
 
             self.libtcod.console_flush()

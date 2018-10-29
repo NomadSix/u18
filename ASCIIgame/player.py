@@ -27,3 +27,5 @@ class player(obj):
         self.intelligence = sum(randint(1, 6) for _ in range(3))
         self.wisdom = sum(randint(1, 6) for _ in range(3))
         self.charisma = sum(randint(1, 6) for _ in range(3))
+    
+    
