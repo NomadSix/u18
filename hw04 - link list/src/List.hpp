@@ -1,3 +1,8 @@
+// File Name: List.hpp
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 4
+
 #ifndef DOUBLE_LINK_LIST_HPP
 #define DOUBLE_LINK_LISH_HPP
 

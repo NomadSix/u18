@@ -1,3 +1,8 @@
+// File Name: List.i
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 4
+
 //Default Constructor
 template<typename T>
 List<T>::List()

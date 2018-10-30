@@ -1,3 +1,7 @@
+// File Name: const_iterator.i
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 4
 
 template <typename T>
 List<T>::const_iterator::const_iterator(Node *node) : _res(node)

@@ -1,3 +1,7 @@
+// File Name: Reverse_Iterator.i
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 4
 
 template <typename T>
 List<T>::reverse_iterator::reverse_iterator(Node *node) : _res(node)
