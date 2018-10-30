@@ -2,6 +2,7 @@ from batch import batch
 from obj import obj
 from player import player
 from tile import Tile
+from room import room
 from random import *
 
 class window:
@@ -25,14 +26,16 @@ class window:
         for y in range(self.height) ]
             for x in range(self.width) ]
         self.char = player(randrange(1, self.width - 16), randrange(1, self.height - 1), '@', self.libtcod.amber)
+        self.char.roll()
         self.objs.append(self.char)
         for objd in self.objs:
             self.batch.add(objd)
         
+        tes = room(self.height, self.width, self.libtcod)
         # places random walls for 
         for n in range(self.numWalls):
             self.map[randrange(1, self.width - 14)][randrange(1, self.height - 1)].block_sight = True
-        
+        self.map = tes.getMap()
         for y in range(self.height):
             for x in range(self.width):
                 self.map[x][0].black = self.map[x][0].block_sight = True
@@ -128,26 +131,29 @@ class window:
                 self.libtcod.console_blit(self.controls, 0, 0, self.width, self.height, 0, 0, 0)
             elif self.gamestate == "Game":
                 self.update()
+                self.stats()
                 self.batch.draw()
                 self.libtcod.console_blit(self.game, 0, 0, self.width, self.height, 0, 0, 0)
-                y = 5
-                self.batch.printStr(self.game, self.width - 13, y, str(self.char.name), self.libtcod.white)
-                y = y + 2
-                self.batch.printStr(self.game, self.width - 13, y, 'Str - ' + str(self.char.strength), self.libtcod.white)
-                y = y + 2
-                self.batch.printStr(self.game, self.width - 13, y, 'Dex - ' + str(self.char.dexterity), self.libtcod.white)
-                y = y + 2
-                self.batch.printStr(self.game, self.width - 13, y, 'Int - ' + str(self.char.intelligence), self.libtcod.white)
-                y = y + 2
-                self.batch.printStr(self.game, self.width - 13, y, 'Wis - ' + str(self.char.wisdom), self.libtcod.white)
-                y = y + 2
-                self.batch.printStr(self.game, self.width - 13, y, 'Chr - ' + str(self.char.charisma), self.libtcod.white)
                 self.batch.clear()
 
             self.libtcod.console_flush()
             exit = self.handle_keys(self.map)
             if exit:
                 break
+    def stats(self):
+        y = 5
+        self.batch.printStr(self.game, self.width - 13, y, str(self.char.name), self.libtcod.white)
+        y = y + 2
+        self.batch.printStr(self.game, self.width - 13, y, 'Str - ' + str(self.char.strength), self.libtcod.white)
+        y = y + 2
+        self.batch.printStr(self.game, self.width - 13, y, 'Dex - ' + str(self.char.dexterity), self.libtcod.white)
+        y = y + 2
+        self.batch.printStr(self.game, self.width - 13, y, 'Int - ' + str(self.char.intelligence), self.libtcod.white)
+        y = y + 2
+        self.batch.printStr(self.game, self.width - 13, y, 'Wis - ' + str(self.char.wisdom), self.libtcod.white)
+        y = y + 2
+        self.batch.printStr(self.game, self.width - 13, y, 'Chr - ' + str(self.char.charisma), self.libtcod.white)
+
     # def render_bar(self, x, y, total_width, name, value, maximum, bar_color, back_color, libtcod):
     #     #render a bar (HP, experience, etc). first calculate the width of the bar
     #     bar_width = int(float(value) / maximum * total_width)
