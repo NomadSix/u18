@@ -9,3 +9,4 @@ class Tile(obj):
             block_sight = solid
 
         self.block_sight = block_sight
+        self.floor = False

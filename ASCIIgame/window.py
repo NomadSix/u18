@@ -31,11 +31,18 @@ class window:
         for objd in self.objs:
             self.batch.add(objd)
         
-        tes = room(self.height, self.width, self.libtcod)
+        tes = room(20, 10, 30, 25, self.libtcod, self.game)
         # places random walls for 
-        for n in range(self.numWalls):
-            self.map[randrange(1, self.width - 14)][randrange(1, self.height - 1)].block_sight = True
-        self.map = tes.getMap()
+        # for n in range(self.numWalls):
+        #     self.map[randrange(1, self.width - 14)][randrange(1, self.height - 1)].block_sight = True
+        for y in range(tes.getHeight()):
+            for x in range(tes.getWidth()):
+                # print(x % tes.getWidth())
+                if tes.getMap()[x][y].block_sight == True:
+                    self.map[x + tes.getX()][y + tes.getY()].block_sight = True
+                else:
+                     self.map[x + tes.getX()][y + tes.getY()].floor = True
+
         for y in range(self.height):
             for x in range(self.width):
                 self.map[x][0].black = self.map[x][0].block_sight = True
@@ -44,17 +51,18 @@ class window:
 
                 if (x > self.width - 15):
                     self.map[x][y].black = self.map[x][y].block_sight = True
-
+        # n = 0
         for y in range(self.height):
             for x in range(self.width):
                 wall = self.map[x][y]
+                if wall.floor:
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
                 if wall.block_sight:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
-                else:
-                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
                 if wall.black:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 0,), self.libtcod.BKGND_SET )
-
+        # print(n)
+    
     def changeFont(self, path):
         self.libtcod.console_set_custom_font(path, self.libtcod.FONT_TYPE_GREYSCALE | self.libtcod.FONT_LAYOUT_TCOD)
 
