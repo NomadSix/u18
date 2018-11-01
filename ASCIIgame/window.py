@@ -19,50 +19,79 @@ class window:
         self.numWalls = 30
         self.gamestate = "Title"
         self.objs = []
+        self.char = player(0, 0, '@', self.libtcod.amber)
+        self.objs.append(self.char)
         self.loadcontent()
 
     def loadcontent(self):
         self.map = [[ Tile(False)
         for y in range(self.height) ]
             for x in range(self.width) ]
-        self.char = player(randrange(1, self.width - 16), randrange(1, self.height - 1), '@', self.libtcod.amber)
-        self.char.roll()
-        self.objs.append(self.char)
         for objd in self.objs:
             self.batch.add(objd)
+        self.char.roll()
         
-        tes = room(20, 10, 30, 25, self.libtcod, self.game)
-        # places random walls for 
+        self.tes = room(5, 5, 30, 25)
+        enter = self.tes.getEnter()
+        # self.char.setLoc([enter[0] + self.tes.getX(), enter[1] + self.tes.getY() - 2])
+        self.rooms = []
+        self.rooms.append(self.tes)
+        
+        self.tes = room(5, 5, 30, 25)
+        self.drawRoom()
+
+    def drawRoom(self):
+        
+        map = self.tes.getMap()
+
+        ## Random Walls ##
         # for n in range(self.numWalls):
-        #     self.map[randrange(1, self.width - 14)][randrange(1, self.height - 1)].block_sight = True
-        for y in range(tes.getHeight()):
-            for x in range(tes.getWidth()):
-                # print(x % tes.getWidth())
-                if tes.getMap()[x][y].block_sight == True:
-                    self.map[x + tes.getX()][y + tes.getY()].block_sight = True
+        #     bound = 8
+        #     x = randrange(bound, self.tes.getWidth() - bound)
+        #     y = randrange(bound, self.tes.getHeight() - bound)
+        #     self.tes.getMap()[x][y].block_sight = True
+
+        for y in range(self.tes.getHeight()):
+            for x in range(self.tes.getWidth()):
+                if map[x][y].block_sight:
+                    self.map[x + self.tes.getX()][y + self.tes.getY()].block_sight = True
+                elif map[x][y].wall:
+                    if not map[x][y-1].exit:
+                        self.map[x + self.tes.getX()][y + self.tes.getY()].wall = True
+                        self.map[x + self.tes.getX()][y + self.tes.getY()].block_sight = True
                 else:
-                     self.map[x + tes.getX()][y + tes.getY()].floor = True
-
-        for y in range(self.height):
-            for x in range(self.width):
-                self.map[x][0].black = self.map[x][0].block_sight = True
-                self.map[x][self.height-1].black = self.map[x][self.height-1].block_sight = True
-                self.map[0][y].black = self.map[0][y].block_sight = True
-
-                if (x > self.width - 15):
-                    self.map[x][y].black = self.map[x][y].block_sight = True
-        # n = 0
+                    self.map[x + self.tes.getX()][y + self.tes.getY()].floor = True
+                if map[x][y].enter:
+                    self.map[x + self.tes.getX()][y + self.tes.getY()].block_sight = True
+                    self.char.setLoc([x + self.tes.getX(), y + self.tes.getY() - 2])
+                
+                if map[x][y].exit:
+                    self.map[x + self.tes.getX()][y + self.tes.getY()+1].exit = True
+                    self.map[x + self.tes.getX()][y + self.tes.getY()+1].wall = False
+                    self.map[x + self.tes.getX()][y + self.tes.getY()+1].block_sight = False
+                
+                    
         for y in range(self.height):
             for x in range(self.width):
                 wall = self.map[x][y]
-                if wall.floor:
-                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
-                if wall.block_sight:
+                if wall.exit or wall.enter:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
-                if wall.black:
+        for y in range(self.height):
+            for x in range(self.width):
+                wall = self.map[x][y]
+                if wall.exit:
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 100, 0), self.libtcod.BKGND_SET )
+                elif wall.floor:
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
+                elif wall.wall:
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 70), self.libtcod.BKGND_SET )
+                elif wall.block_sight:
+                    self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 100), self.libtcod.BKGND_SET )
+                else:
+                    output = "      ~~``*         *-          ##          ....         .,,            ,,=                      "
+                    self.batch.printStr(self.game, x, y, output[randrange(0, len(output))], self.libtcod.Color(0, 0, 200))
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 0,), self.libtcod.BKGND_SET )
-        # print(n)
-    
+        
     def changeFont(self, path):
         self.libtcod.console_set_custom_font(path, self.libtcod.FONT_TYPE_GREYSCALE | self.libtcod.FONT_LAYOUT_TCOD)
 
@@ -88,6 +117,7 @@ class window:
         elif self.gamestate == "Title":
             if key.vk == self.libtcod.KEY_1:
                 self.gamestate = "Game"
+                self.loadcontent()
             elif key.vk == self.libtcod.KEY_2:
                 self.gamestate = "Controls"
             elif key.vk == self.libtcod.KEY_3:
@@ -96,7 +126,13 @@ class window:
             self.gamestate = "Title"
 
     def update(self):
-        pass
+        loc = self.char.location()
+        if self.map[loc[0]][loc[1]].exit == True:
+            self.map[loc[0]][loc[1]].exit = False
+            self.tes.newRoom()
+            # enter = self.tes.getEnter()
+            # self.char.setLoc([enter[0] + self.tes.getX(), self.tes.getY() - 10])
+            self.drawRoom()
  
     def draw(self):
         while not self.libtcod.console_is_window_closed():

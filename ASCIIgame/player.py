@@ -27,4 +27,7 @@ class player(obj):
         self.wisdom = sum(randint(1, 6) for _ in range(3))
         self.charisma = sum(randint(1, 6) for _ in range(3))
     
+    def setLoc(self, loc):
+        self.x = loc[0]
+        self.y = loc[1]
     
