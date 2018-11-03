@@ -12,24 +12,17 @@ Stack<T>::Stack()
 
 // parameterized constructor that takes first item
 template <typename T>
-Stack<T>::Stack(T item)
+Stack<T>::Stack(const T item)
 {
     array.push_front(item);
 }
 
 // copy constructor
 template <typename T>
-Stack<T>::Stack(Stack &copy)
+Stack<T>::Stack(const Stack &copy)
 {
-
-    typename List<T>::iterator q = copy.array.begin();
-    // while (q != copy.array.end()) {
-    //     q++;
-    //     array.push_back(*q);
-    // }
-    for (int i = copy.size(); i > 0; i--) {
+    for (auto q = copy.array.begin(); q != nullptr; q++) {
         array.push_back(*q);
-        q++;
     }
 }
 
@@ -67,10 +60,9 @@ T Stack<T>::top()
     if (array.size() == 0) {
         throw std::underflow_error("stack is empty");
     } else {
-        typename List<T>::iterator q = array.begin();
-        for (int i = array.size(); i > 1; i--) {
+        auto q = array.begin();
+        for (size_t i = array.size(); i > 1; --i)
             q++;
-        }
         return *q;
     }
 }
@@ -82,17 +74,16 @@ const T Stack<T>::top() const
     if (array.size() == 0) {
         throw std::underflow_error("stack is empty");
     } else {
-        typename List<T>::const_iterator q = array.begin();
-        for (int i = array.size(); i > 1; i--) {
+        auto q = array.begin();
+        for (size_t i = array.size(); i > 1; --i)
             q++;
-        }
         return *q;
     }
 }
 
 // function push; does not throw exceptions
 template <typename T>
-void Stack<T>::push(T val) noexcept
+void const Stack<T>::push(const T val) noexcept
 {
     array.push_back(val);
 }
@@ -100,26 +91,21 @@ void Stack<T>::push(T val) noexcept
 // function emplace; does not throw exceptions
 template <typename T>
 template <class... Args>
-void Stack<T>::emplace(Args&&... args) noexcept
+void const Stack<T>::emplace(Args&&... args) noexcept
 {
-    // T tmp = T(std::forward<Args>(args)...);
     array.emplace_back(args...);
 }
 
 // function pop; throws underflow if stack is empty
 template <typename T>
-void Stack<T>::pop()
+void const Stack<T>::pop()
 {
-    if (array.size() == 0) {
+    if (array.size() == 0)
         throw std::underflow_error("stack is empty");
-    }
-    // array.erase(array.at(array.size()));
-    // array.erase(array.end()--);
-    
-    typename List<T>::iterator q = array.begin();
-    for (int i = array.size(); i > 1; i--) {
+
+    auto q = array.begin();
+    for (int i = array.size(); i > 1; --i)
         q++;
-    }
     array.erase(q);
 }
 
@@ -127,16 +113,19 @@ void Stack<T>::pop()
 template <typename T>
 const Stack<T>& Stack<T>::operator =(Stack& copy)
 {
-    if (array.begin() != copy.array.begin()) {
-        typename List<T>::iterator q = array.begin();
-        for (int i = array.size(); i > 0; i--) {
-            array.erase(q);
-            q++;
+    auto current = array.begin();
+    auto next = copy.array.begin();
+    if (current == next) {
+        return *this;
+    } else {
+        for (size_t i = array.size(); i > 0; --i) {
+            array.erase(current);
+            current++;
         }
-        q = copy.array.begin();
-        for (int i = copy.size(); i > 0; i--) {
-            array.push_back(*q);
-            q++;
+        current = next;
+        for (size_t i = copy.size(); i > 0; --i) {
+            array.push_back(*current);
+            current++;
         }
     }
     return *this;
@@ -146,6 +135,8 @@ const Stack<T>& Stack<T>::operator =(Stack& copy)
 template <typename T>
 Stack<T>& Stack<T>::operator =(Stack&& move)
 {
+    if (array.begin() == move.array.begin())
+        return *this;
     array = move.array;
     return *this;
 }

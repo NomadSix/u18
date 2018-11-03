@@ -86,10 +86,10 @@ public:
     iterator insert(iterator loc, T item);
 
     // function push_back;
-    void push_back(T item);
+    void push_back(const T item);
 
     // function push_front;
-    void push_front(T item);
+    void push_front(const T item);
 
     // function emplace; takes an iterator to position where
     // insertion occurs as well as item constructor parameters,
@@ -116,7 +116,7 @@ public:
     }
 
     // function size();
-    unsigned int size() const;
+    size_t size() const;
     // function empty();
     bool empty() const;
     // function copy assignment overload;
