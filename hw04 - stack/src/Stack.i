@@ -21,7 +21,12 @@ Stack<T>::Stack(const T item)
 template <typename T>
 Stack<T>::Stack(const Stack &copy)
 {
+<<<<<<< HEAD:hw04 - link list/src/Stack.i
     for (auto q = copy.array.begin(); q != nullptr; q++) {
+=======
+    typename List<T>::iterator q = copy.array.begin();
+    for (int i = copy.size(); i > 0; i--) {
+>>>>>>> 3486ccf7ec93357bf6917b9a67db4cf770829a9e:hw04 - stack/src/Stack.i
         array.push_back(*q);
     }
 }

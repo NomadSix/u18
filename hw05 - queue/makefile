@@ -7,7 +7,7 @@
 ### Compiler variables
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
-EXE = hw02
+EXE = hw04
 
 ### Source variables
 SRCDIR = src
@@ -23,7 +23,7 @@ RELOBJS := $(subst src, rel, $(OBJS))
 DBGDIR = dbg
 DBGEXE = $(DBGDIR)/$(EXE)
 DBGOBJS := $(subst src, dbg, $(OBJS))
-DBGFLAGS := $(CXXFLAGS) -g -O0
+DBGFLAGS := $(CXXFLAGS) -g -O0 -Wall
 
 ### Release rules
 release : prep $(RELEXE)
