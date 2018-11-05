@@ -19,10 +19,10 @@ class window:
         self.batch = batch(self.game, libtcod)
         self.numWalls = 30
         self.gamestate = "Title"
+        self.itemType = ['yellow', 'green']
         self.objs = []
         self.char = player(0, 0, '@', self.libtcod.amber)
-        testItem = item(10, 10, "yellow")
-        self.char.inventory[testItem.key] = 1
+        self.items = []
         self.objs.append(self.char)
         self.loadcontent()
 
@@ -43,10 +43,12 @@ class window:
 
     def drawRoom(self):
         
+        # removes items from inventory at the beinging of a new room and returns points
         if len(self.char.inventory) > 0:
             items = self.char.inventory
-            for key in items:
+            for key in items.keys():
                 self.char.points = self.char.points + (items[key] * item(0,0,key).value)
+                items.pop(key)
 
         map = self.tes.getMap()
 
@@ -89,6 +91,10 @@ class window:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 100, 0), self.libtcod.BKGND_SET )
                 elif wall.floor:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
+                    key = self.itemType[randint(0, len(self.itemType))]
+                    slime = item(x, y, key)
+                    self.items.append(slime)
+                    self.libtcod.console_set_char_background(self.game, x, y, slime.getColor(self.libtcod), self.libtcod.BKGND_SET)
                 elif wall.wall:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 70), self.libtcod.BKGND_SET )
                 elif wall.block_sight:
@@ -120,6 +126,10 @@ class window:
             elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_RIGHT):
                 if map[loc[0]+1][loc[1]].block_sight == False:
                     self.char.handle_keys(1, 0)
+            elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_0): 
+                self.char.inventory[item(0,0,'yellow').key] = 3
+                self.char.inventory[item(0,0,'red').key] = 2
+            
         elif self.gamestate == "Title":
             if key.vk == self.libtcod.KEY_1:
                 self.gamestate = "Game"
