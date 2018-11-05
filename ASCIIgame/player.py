@@ -14,6 +14,8 @@ class player(obj):
         self.intelligence = 0
         self.wisdom = 0
         self.charisma = 0
+        self.points = 0
+        self.inventory = dict()
 
     def handle_keys(self, dx, dy):
         # movement keys

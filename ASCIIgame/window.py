@@ -3,6 +3,7 @@ from obj import obj
 from player import player
 from tile import Tile
 from room import room
+from item import item
 from random import *
 
 class window:
@@ -20,6 +21,8 @@ class window:
         self.gamestate = "Title"
         self.objs = []
         self.char = player(0, 0, '@', self.libtcod.amber)
+        testItem = item(10, 10, "yellow")
+        self.char.inventory[testItem.key] = 1
         self.objs.append(self.char)
         self.loadcontent()
 
@@ -36,12 +39,15 @@ class window:
         # self.char.setLoc([enter[0] + self.tes.getX(), enter[1] + self.tes.getY() - 2])
         self.rooms = []
         self.rooms.append(self.tes)
-        
-        self.tes = room(5, 5, 30, 25)
         self.drawRoom()
 
     def drawRoom(self):
         
+        if len(self.char.inventory) > 0:
+            items = self.char.inventory
+            for key in items:
+                self.char.points = self.char.points + (items[key] * item(0,0,key).value)
+
         map = self.tes.getMap()
 
         ## Random Walls ##
@@ -130,8 +136,6 @@ class window:
         if self.map[loc[0]][loc[1]].exit == True:
             self.map[loc[0]][loc[1]].exit = False
             self.tes.newRoom()
-            # enter = self.tes.getEnter()
-            # self.char.setLoc([enter[0] + self.tes.getX(), self.tes.getY() - 10])
             self.drawRoom()
  
     def draw(self):
@@ -197,16 +201,11 @@ class window:
         self.batch.printStr(self.game, self.width - 13, y, 'Wis - ' + str(self.char.wisdom), self.libtcod.white)
         y = y + 2
         self.batch.printStr(self.game, self.width - 13, y, 'Chr - ' + str(self.char.charisma), self.libtcod.white)
+        y = y + 5
+        self.batch.printStr(self.game, self.width - 13, y, 'Points - ' + str(self.char.points), self.libtcod.white)
 
-    # def render_bar(self, x, y, total_width, name, value, maximum, bar_color, back_color, libtcod):
-    #     #render a bar (HP, experience, etc). first calculate the width of the bar
-    #     bar_width = int(float(value) / maximum * total_width)
-    
-    #     #render the background first
-    #     libtcod.console_set_default_background(self.game, back_color)
-    #     libtcod.console_rect(self.game, x, y, total_width, 100, False, libtcod.BKGND_SCREEN)
-    
-    #     #now render the bar on top
-    #     libtcod.console_set_default_background(self.title, bar_color)
-    #     if bar_width > 0:
-    #         libtcod.console_rect(self.game, x, y, bar_width, 1, False, libtcod.BKGND_SCREEN)
+        #inventory
+        y = 31
+        self.batch.printStr(self.game, 5, y, "Inventory:", self.libtcod.white)
+        y = y + 2
+        self.batch.printStr(self.game, 5, y, str(self.char.inventory), self.libtcod.white)
