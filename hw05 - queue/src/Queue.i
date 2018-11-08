@@ -1,8 +1,10 @@
 
 // Default Constructor
 template <typename T>
-Queue<T>::Queue() : list(list<T>())
-{}
+Queue<T>::Queue()
+{
+    list = List<T>();
+}
 
 // Parameterized Constructor
 template <typename T>
@@ -54,7 +56,7 @@ T& Queue<T>::front()
 {
     if (list.size() == 0)
         throw std::underflow_error("stack is empty");
-    return list.begin();
+    return *list.begin();
 }
 
 // function front, read-only, throws underflow
@@ -63,7 +65,7 @@ const T& Queue<T>::front() const
 {
     if (list.size() == 0)
         throw std::underflow_error("stack is empty");
-    return list.begin();
+    return *list.begin();
 }
 
 // function back, l-value, throws underflow
@@ -113,7 +115,7 @@ void Queue<T>::pop()
 {
     if (list.size() == 0)
         throw std::underflow_error("stack is empty");
-    array.erase(back());
+    list.erase(list.begin());
 }
 
 // Copy assignment operator overload
@@ -122,12 +124,13 @@ const Queue<T>& Queue<T>::operator =(Queue& copy)
 {
     if (list.begin() != copy.list.begin()) {
 
-        //erase all vals in queue
+        //pop all vals in queue
         for (size_t i = list.size(); i > 0; i--) {
-            list.erase(back());
+            pop();
         }
+        //copy over vals from other queue
         auto q = copy.list.begin();
-        for (size_t = list.size(); i > 0; i--) {
+        for (size_t i = copy.list.size(); i > 0; i--) {
             list.push_back(*q);
             q++;
         }
@@ -141,6 +144,6 @@ Queue<T>& Queue<T>::operator =(Queue&& move)
 {
     if (list.begin() == move.list.begin())
         return *this;
-    list = move.array;
+    list = move.list;
     return *this;
 }
