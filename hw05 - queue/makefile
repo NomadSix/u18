@@ -7,7 +7,7 @@
 ### Compiler variables
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
-EXE = hw04
+EXE = hw05
 
 ### Source variables
 SRCDIR = src

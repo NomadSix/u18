@@ -21,7 +21,7 @@ class window:
         self.gamestate = "Title"
         self.itemType = ['yellow', 'green']
         self.objs = []
-        self.char = player(0, 0, '@', self.libtcod.amber)
+        self.char = player(0, 0, '@', self.libtcod.amber, libtcod)
         self.items = []
         self.objs.append(self.char)
         self.loadcontent()
@@ -40,15 +40,20 @@ class window:
         self.rooms = []
         self.rooms.append(self.tes)
         self.drawRoom()
+        self.char.inventory[item(0,0,'yellow').key] = 0
+        self.char.inventory[item(0,0,'green').key] = 0
 
     def drawRoom(self):
         
         # removes items from inventory at the beinging of a new room and returns points
+        self.items = []
         if len(self.char.inventory) > 0:
             items = self.char.inventory
             for key in items.keys():
                 self.char.points = self.char.points + (items[key] * item(0,0,key).value)
                 items.pop(key)
+                self.char.inventory[item(0,0,'yellow').key] = 0
+                self.char.inventory[item(0,0,'green').key] = 0
 
         map = self.tes.getMap()
 
@@ -91,10 +96,12 @@ class window:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 100, 0), self.libtcod.BKGND_SET )
                 elif wall.floor:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET )
-                    key = self.itemType[randint(0, len(self.itemType))]
-                    slime = item(x, y, key)
-                    self.items.append(slime)
-                    self.libtcod.console_set_char_background(self.game, x, y, slime.getColor(self.libtcod), self.libtcod.BKGND_SET)
+                    if randrange(0,10) == 0:
+                        key = self.itemType[randint(0, len(self.itemType)-1)]
+                        slime = item(x, y, key)
+                        self.items.append(slime)
+                        self.libtcod.console_set_char_background(self.game, x, y, slime.getColor(self.libtcod), self.libtcod.BKGND_SET)
+                    
                 elif wall.wall:
                     self.libtcod.console_set_char_background(self.game, x, y, self.libtcod.Color(0, 0, 70), self.libtcod.BKGND_SET )
                 elif wall.block_sight:
@@ -126,13 +133,11 @@ class window:
             elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_RIGHT):
                 if map[loc[0]+1][loc[1]].block_sight == False:
                     self.char.handle_keys(1, 0)
-            elif self.libtcod.console_is_key_pressed(self.libtcod.KEY_0): 
-                self.char.inventory[item(0,0,'yellow').key] = 3
-                self.char.inventory[item(0,0,'red').key] = 2
             
         elif self.gamestate == "Title":
             if key.vk == self.libtcod.KEY_1:
                 self.gamestate = "Game"
+                self.char.points = 0
                 self.loadcontent()
             elif key.vk == self.libtcod.KEY_2:
                 self.gamestate = "Controls"
@@ -147,6 +152,14 @@ class window:
             self.map[loc[0]][loc[1]].exit = False
             self.tes.newRoom()
             self.drawRoom()
+        for item in self.items:
+            if item.getLoc() == self.char.getLoc():
+                self.items.remove(item)
+                if self.char.inventory[item.key] != 0:
+                    self.char.inventory[item.key] = self.char.inventory[item.key] + 1
+                else: 
+                    self.char.inventory[item.key] = 1
+                self.libtcod.console_set_char_background(self.game, item.x, item.y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET)
  
     def draw(self):
         while not self.libtcod.console_is_window_closed():

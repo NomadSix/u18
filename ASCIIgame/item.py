@@ -20,9 +20,9 @@ class item:
     
     def getColor(self, libtcod):
         if self.key == 'yellow':
-            return libtcod.Color(255,255,50)
+            return libtcod.dark_yellow
         elif self.key == 'green':
-            return libtcod.Color(0, 200, 0)
+            return libtcod.dark_green
         elif self.key == 'red':
             return libtcod.Color(200, 0, 0)
         elif self.key == 'orange':
