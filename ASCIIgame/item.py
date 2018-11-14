@@ -10,7 +10,7 @@ class item:
         elif key == 'green':
             self.value = 1
         elif key == 'red':
-            self.value = -2
+            self.value = -5
         elif key == 'orange':
             self.value = 3
         elif key == 'blue':
