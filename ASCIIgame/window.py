@@ -23,6 +23,7 @@ class window:
         self.objs = []
         self.char = player(0, 0, '@', self.libtcod.amber, libtcod)
         self.items = []
+        self.red = []
         self.objs.append(self.char)
         self.loadcontent()
 
@@ -42,11 +43,13 @@ class window:
         self.drawRoom()
         self.char.inventory[item(0,0,'yellow').key] = 0
         self.char.inventory[item(0,0,'green').key] = 0
+        self.char.inventory[item(0,0,'red').key] = 0
 
     def drawRoom(self):
         
         # removes items from inventory at the beinging of a new room and returns points
         self.items = []
+        self.items.append(item(randrange(7, 20),randrange(7, 20), 'red'))
         if len(self.char.inventory) > 0:
             items = self.char.inventory
             for key in items.keys():
@@ -54,6 +57,7 @@ class window:
                 items.pop(key)
                 self.char.inventory[item(0,0,'yellow').key] = 0
                 self.char.inventory[item(0,0,'green').key] = 0
+                self.char.inventory[item(0,0,'red').key] = 0
 
         map = self.tes.getMap()
 
@@ -152,15 +156,50 @@ class window:
             self.map[loc[0]][loc[1]].exit = False
             self.tes.newRoom()
             self.drawRoom()
-        for item in self.items:
-            if item.getLoc() == self.char.getLoc():
-                self.items.remove(item)
-                if self.char.inventory[item.key] != 0:
-                    self.char.inventory[item.key] = self.char.inventory[item.key] + 1
+            self.red = []
+        for obj in self.items:
+            if obj.getLoc() == self.char.getLoc():
+                self.items.remove(obj)
+                if self.char.inventory[obj.key] != 0:
+                    self.char.inventory[obj.key] = self.char.inventory[obj.key] + 1
                 else: 
-                    self.char.inventory[item.key] = 1
-                self.libtcod.console_set_char_background(self.game, item.x, item.y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET)
- 
+                    self.char.inventory[obj.key] = 1
+                self.libtcod.console_set_char_background(self.game, obj.x, obj.y, self.libtcod.Color(50, 50, 150), self.libtcod.BKGND_SET)
+                
+            if obj.key == 'red' and obj.dead == False:
+                x = obj.getLoc()[0]
+                y = obj.getLoc()[1]
+                i = item(x-1,y,'red')
+                if randrange(0, 2) != 1:
+                    i.dead = True
+                if not self.contains(i):
+                    self.red.append(i)
+                i = item(x+1,y,'red')
+                if randrange(0, 2) != 1:
+                    i.dead = True
+                if not self.contains(i):
+                    self.red.append(i)
+                i = item(x,y-1,'red')
+                if randrange(0, 2) != 1:
+                    i.dead = True
+                if not self.contains(i):
+                    self.red.append(i)
+                i = item(x,y+1,'red')
+                if randrange(0, 2) != 1:
+                    i.dead = True
+                if not self.contains(i):
+                    self.red.append(i)
+                self.items.remove(obj)
+        for obj in self.red:
+            self.items.append(obj)
+            self.libtcod.console_set_char_background(self.game, obj.x, obj.y, self.libtcod.red, self.libtcod.BKGND_SET)
+    
+    def contains(self, obj):
+        for i in range(0, len(self.items)):
+            if self.items[i].getLoc() == obj.getLoc():
+                return True
+        return False
+    
     def draw(self):
         while not self.libtcod.console_is_window_closed():
             if self.gamestate == "Title":

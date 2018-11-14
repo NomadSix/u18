@@ -3,6 +3,7 @@ class item:
         self.x = x
         self.y = y
         self.key = key
+        self.dead = False
         self.value = 0
         if key == 'yellow':
             self.value = 5
