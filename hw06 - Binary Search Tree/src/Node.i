@@ -1,10 +1,10 @@
 
 template <typename T>
-BST<T>::Node::Node(T val) 
-    : _left(nullptr)
+BST<T>::Node::Node(T val)
+    : _val(val)
+    , _left(nullptr)
     , _right(nullptr)
     , _parent(nullptr)
-    , _val(val)
 {}
 
 template <typename T>

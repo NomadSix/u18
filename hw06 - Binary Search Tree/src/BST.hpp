@@ -38,17 +38,17 @@ public:
     // function min; read-only, throws underflow if empty
     T& min() const;
     // function max; l-value, throws underflow if empty
-    T& max(T& val);
+    T& max();
     // function max; read-only, throws underflow if empty
-    T& max(T& val) const;
+    T& max() const;
 
     // function insert; does not throw exceptions
-    void insert(T& val) const noexcept;
+    void insert(T val) noexcept;
     // function emplace; does not throw exceptions
     template <typename... Args>
     void emplace(Args&&... args) noexcept;
     // function erase; takes a type T, throws invalid_argument if empty or cannot be found
-    void erase();    
+    void erase(T key);    
 
     // function clear; does not throw exceptions
     void clear() noexcept;
@@ -59,9 +59,9 @@ public:
     BST& operator =(BST<T>&&);
 private:
     class Node;
-    Node *root;
-    size_t size;
+    Node* root;
     // Private data and helper functions go here
+    Node* rinsert(Node *node, T key) noexcept;
 };
 
 // NODE CLASS
@@ -102,8 +102,8 @@ public:
         return !(lhs == rhs);
     }
 private:
-    Node *_curr;
-    Node * _unfinRoot;
+    Node* _curr;
+    Node* _unfinRoot;
 
     void findNextSubroot();
 };
@@ -125,8 +125,8 @@ public:
         return !(lhs == rhs);
     }
 private:
-    Node *_curr;
-    Node *_unfinRoot;
+    Node* _curr;
+    Node* _unfinRoot;
 
     // Private functions
     void findNextSubroot();
@@ -149,8 +149,8 @@ public:
         return !(lhs == rhs);
     }
 private:
-    Node *_curr;
-    Node *_unfinRoot;
+    Node* _curr;
+    Node* _unfinRoot;
 
     void findNextSubroot();
 };
