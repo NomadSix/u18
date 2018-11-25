@@ -7,10 +7,10 @@ int main() {
     tree.insert(60);
     tree.insert(8);
     tree.insert(-10);
-    tree.erase(-10);
-    auto i = tree.begin();
+    // tree.erase(-10);
+    auto i = tree.prbegin();
     // cout << tree.max();
-    while (i != tree.end()) {
+    while (i != tree.prend()) {
         cout << *i << endl;
         i++;
     }

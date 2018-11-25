@@ -22,8 +22,9 @@ public:
     class inorder_iterator;
     class postorder_iterator;
     // function prbegin; pr = preorder
-    preorder_iterator prbebin();
+    preorder_iterator prbegin();
     // function prend
+    preorder_iterator prend();
     inorder_iterator begin();
     inorder_iterator end();
     // function pobegin; po = postorder

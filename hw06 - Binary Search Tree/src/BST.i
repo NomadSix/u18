@@ -140,9 +140,19 @@ BST<T>& BST<T>::operator =(BST<T>&&)
 
 // function prbegin; pr = preorder
 template <typename T>
-typename BST<T>::preorder_iterator BST<T>::prbebin()
+typename BST<T>::preorder_iterator BST<T>::prbegin()
 {
     return preorder_iterator(root, nullptr);
+}
+
+template <typename T>
+typename BST<T>::preorder_iterator BST<T>::prend()
+{
+    while (root->parent() != nullptr)
+        root = root->parent();
+    while (root->right() != nullptr)
+        root = root->right();
+    return preorder_iterator(root, root->parent());
 }
 // function prend
 template <typename T>
