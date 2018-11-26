@@ -13,6 +13,7 @@ int main() {
     while (i != tree.prend()) {
         cout << *i << endl;
         i++;
+        cin.get();
     }
     // i = tree.end();
     // cout << *i << endl;

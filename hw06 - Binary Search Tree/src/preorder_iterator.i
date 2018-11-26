@@ -18,9 +18,21 @@ typename BST<T>::preorder_iterator& BST<T>::preorder_iterator::operator++()
     // Check if empty
     if (_curr == nullptr && _unfinRoot == nullptr)
         return *this;
-    
-    // Check if at end
-    
+    if (_curr->left() == nullptr) {
+        while (_curr->parent()->right() == nullptr) {
+            _curr = _curr->parent();
+            if (_curr->parent() == nullptr) {
+                break;
+            }
+        }
+        _curr = _curr->parent();
+    } else {
+        _curr = _curr->left();
+    }
+    if (_curr->right()) {
+        _curr = _curr->right();
+    }
+    return *this;
 }
 
 template <typename T>
