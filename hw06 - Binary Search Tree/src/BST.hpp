@@ -2,6 +2,7 @@
 #define BINARY_SEARCH_TREE_HPP
 
 #include <stdexcept>
+#include "Queue.hpp"
 using namespace std;
 
 template <typename T>
@@ -63,6 +64,7 @@ private:
     Node* root;
     // Private data and helper functions go here
     Node* rinsert(Node *node, T key) noexcept;
+    Node* eraseHelper(NOde *node, T key);
 };
 
 // NODE CLASS
@@ -105,6 +107,7 @@ public:
 private:
     Node* _curr;
     Node* _unfinRoot;
+    Queue<T>* _queue;
 
     void findNextSubroot();
 };

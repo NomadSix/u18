@@ -107,14 +107,28 @@ void BST<T>::emplace(Args&&... args) noexcept
 template <typename T>
 void BST<T>::erase(T key)
 {
-    if (empty())
+    // if (empty())
+    //     throw std::invalid_argument("Tree is empty");
+    // auto i = begin();
+    // while (*i != key)
+    //     i++;
+    // // if (*i)
+    // //     throw std::invalid_argument("Value can't be found");
+    // // delete *i;?
+    return eraseHelper(root, key);
+}
+
+template <typename T>
+typename BST<T>::Node* BST<T>::eraseHelper(Node* node, T key) 
+{
+    if (!node)
         throw std::invalid_argument("Tree is empty");
-    auto i = begin();
-    while (*i)
-        i++;
-    if (*i)
-        throw std::invalid_argument("Value can't be found");
-    *i = NULL;
+    
+    if (key < node->key()) {
+        node.setLeft(eraseHelper(node->left(), key));
+    } else if (key > node->key()) {
+        node.setRight(eraseHelper(node->right(), key));
+    }
 }
 
 // function clear; does not throw exceptions
