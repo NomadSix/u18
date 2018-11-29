@@ -20,7 +20,7 @@ public:
     // function empty, does not throw exceptions
     bool empty() const noexcept;
     // function size, does not throw exceptions
-    size_t size() const noexcept;
+    int size() const noexcept;
     // function front, l-value, throws underflow
     T& front();
     // function front, read-only, throws underflow

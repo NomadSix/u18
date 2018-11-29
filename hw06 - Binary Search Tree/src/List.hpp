@@ -1,3 +1,8 @@
+// File Name: List.hpp
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 4
+
 #ifndef DOUBLE_LINK_LIST_HPP
 #define DOUBLE_LINK_LISH_HPP
 
@@ -81,10 +86,10 @@ public:
     iterator insert(iterator loc, T item);
 
     // function push_back;
-    void push_back(T item);
+    void push_back(const T item);
 
     // function push_front;
-    void push_front(T item);
+    void push_front(const T item);
 
     // function emplace; takes an iterator to position where
     // insertion occurs as well as item constructor parameters,
@@ -111,9 +116,9 @@ public:
     }
 
     // function size();
-    unsigned int size();
+    size_t size() const;
     // function empty();
-    bool empty();
+    bool empty() const;
     // function copy assignment overload;
     const List& operator =(List<T>&);
     // function move assignment overload;

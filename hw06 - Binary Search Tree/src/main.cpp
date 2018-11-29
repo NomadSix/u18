@@ -43,10 +43,12 @@ int main() {
     tree.insert(1);
     // tree.insert(999);
 
+    tree = tree;
 
-    tree.erase(90);
-    tree.erase(70);
-    auto i = tree.begin();
+
+    // tree.erase(90);
+    // tree.erase(70);
+    auto i = tree.prbegin();
     // 
     // cout << tree.max();
     while (*i != 1000) {

@@ -45,7 +45,7 @@ bool Queue<T>::empty() const noexcept
 
 // function size, does not throw exceptions
 template <typename T>
-size_t Queue<T>::size() const noexcept
+int Queue<T>::size() const noexcept
 {
     return list.size();
 }

@@ -62,9 +62,13 @@ public:
 private:
     class Node;
     Node* root;
+    Queue<T> _queue;
     // Private data and helper functions go here
     Node* rinsert(Node *node, T key) noexcept;
-    Node* eraseHelper(NOde *node, T key);
+    Node* eraseHelper(Node *node, T key);
+    void walk(Node* node);
+    void prwalk(Node* node);
+    void powalk(Node* node);
 };
 
 // NODE CLASS
@@ -86,30 +90,6 @@ private:
     Node* _left;
     Node* _right;
     Node* _parent;
-};
-
-// PREORDER_ITERATOR CLASS
-template <typename T>
-class BST<T>::preorder_iterator {
-public:
-    preorder_iterator(Node *curr, Node* subroot);
-    T& operator*();
-    preorder_iterator& operator++();
-    preorder_iterator operator++(int);
-    friend bool operator==(const typename BST<T>::preorder_iterator &lhs,  const typename BST<T>::preorder_iterator &rhs)
-    {
-        return lhs._curr == rhs._curr && lhs._unfinRoot == rhs._unfinRoot;
-    }
-    friend bool operator!=(const typename BST<T>::preorder_iterator &lhs,  const typename BST<T>::preorder_iterator &rhs)
-    {
-        return !(lhs == rhs);
-    }
-private:
-    Node* _curr;
-    Node* _unfinRoot;
-    Queue<T>* _queue;
-
-    void findNextSubroot();
 };
 
 // INORDER_ITERATOR CLASS
@@ -140,7 +120,7 @@ private:
 template <typename T>
 class BST<T>::postorder_iterator {
 public:
-    postorder_iterator(Node *curr, Node *subroot);
+    postorder_iterator(Queue<T>);
     T& operator*();
     postorder_iterator& operator++();
     postorder_iterator operator++(int);
@@ -153,10 +133,27 @@ public:
         return !(lhs == rhs);
     }
 private:
-    Node* _curr;
-    Node* _unfinRoot;
+    Queue<T> _queue;
+};
 
-    void findNextSubroot();
+// PREORDER_ITERATOR CLASS
+template <typename T>
+class BST<T>::preorder_iterator {
+public:
+    preorder_iterator(Queue<T>);
+    T& operator*();
+    preorder_iterator& operator++();
+    preorder_iterator operator++(int);
+    friend bool operator==(const typename BST<T>::preorder_iterator &lhs,  const typename BST<T>::preorder_iterator &rhs)
+    {
+        return lhs._curr == rhs._curr && lhs._unfinRoot == rhs._unfinRoot;
+    }
+    friend bool operator!=(const typename BST<T>::preorder_iterator &lhs,  const typename BST<T>::preorder_iterator &rhs)
+    {
+        return !(lhs == rhs);
+    }
+private:
+    Queue<T> _queue;
 };
 
 
@@ -178,5 +175,6 @@ private:
 
 
 // POSTORDER_ITERATOR FUNCTIONS
+#include "postorder_iterator.i"
 
 #endif

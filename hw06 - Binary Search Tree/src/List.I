@@ -1,3 +1,8 @@
+// File Name: List.i
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 4
+
 //Default Constructor
 template<typename T>
 List<T>::List()
@@ -9,10 +14,6 @@ List<T>::List()
 template<typename T>
 List<T>::List(const T& item)
 {
-//    Node *node = new Node(item);
-//    _head->setNext(node);
-//    node->setPrev(_head);
-//    node->setNext(_last);
     _head = _last = nullptr;
     push_front(item);
 }
@@ -101,7 +102,7 @@ typename List<T>::iterator List<T>::begin()
 template<typename T>
 typename List<T>::iterator List<T>::end()
 {
-    return iterator(nullptr);
+    return iterator(_last->next());
 }
 
 // function begin const overload
@@ -115,32 +116,32 @@ typename List<T>::const_iterator List<T>::begin() const
 template<typename T>
 typename List<T>::const_iterator List<T>::end() const
 {
-    return const_iterator(nullptr);
+    return const_iterator(_last->next());
 }
 
 // function rbegin
 template<typename T>
 typename List<T>::reverse_iterator List<T>::rbegin()
 {
-    return reverse_iterator(_last);
+    return reverse_iterator(_last->next());
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::rbegin() const
 {
-    return const_reverse_iterator(_last);
+    return const_reverse_iterator(_last->next());
 }
 
 template<typename T>
 typename List<T>::reverse_iterator List<T>::rend()
 {
-    return reverse_iterator(nullptr);
+    return reverse_iterator(_head);
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::rend() const
 {
-    return const_reverse_iterator(nullptr);
+    return const_reverse_iterator(_head);
 }
 
 template<typename T>
@@ -152,19 +153,19 @@ typename List<T>::const_iterator List<T>::cbegin() const
 template<typename T>
 typename List<T>::const_iterator List<T>::cend() const
 {
-    return const_iterator(nullptr);
+    return const_iterator(_last->next());
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::crbegin() const
 {
-    return const_reverse_iterator(_last);
+    return const_reverse_iterator(_last->next());
 }
 
 template<typename T>
 typename List<T>::const_reverse_iterator List<T>::crend() const
 {
-    return const_reverse_iterator(nullptr);
+    return const_reverse_iterator(_head);
 }
 
 template<typename T>
@@ -224,11 +225,12 @@ typename List<T>::iterator List<T>::erase(iterator it)
             return iterator(toReturn);
         }
     }
-    throw std::invalid_argument("item not in list");
+    return begin();
+    //throw std::invalid_argument("item not in list");
 }
 
 template<typename T>
-void List<T>::push_back(T item)
+void List<T>::push_back(const T item)
 {
     if (_last == nullptr) {
         push_front(item);
@@ -238,7 +240,7 @@ void List<T>::push_back(T item)
 }
 
 template<typename T>
-void List<T>::push_front(T item)
+void List<T>::push_front(const T item)
 {
     Node *in = new Node(item);
     if (_head == nullptr) {
@@ -253,7 +255,7 @@ void List<T>::push_front(T item)
 }
 
 template<typename T>
-typename List<T>::iterator List<T>::insert(iterator loc, T item)
+typename List<T>::iterator List<T>::insert(iterator loc, const T item)
 {
     Node *in = new Node(item);
     if (!_head) {
@@ -276,7 +278,7 @@ typename List<T>::iterator List<T>::insert(iterator loc, T item)
 }
 
 template<typename T>
-unsigned int List<T>::size()
+size_t List<T>::size() const
 {
     if (!_head)
         return 0;
@@ -293,7 +295,7 @@ unsigned int List<T>::size()
 
 // checks if list is empty
 template<typename T>
-bool List<T>::empty()
+bool List<T>::empty() const
 {
     return _head == nullptr;
 }
