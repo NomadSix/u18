@@ -1,63 +1,62 @@
-#include "BST.hpp"
+// File Name: main.cpp
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 6
+
+#include "test_interface.hpp"
 #include <iostream>
-int main() {
-    BST<int> tree = BST<int>();
-    // tree.insert(60);
-    // tree.insert(70);
-    // tree.insert(65);
-    // tree.insert(80);
+#include "BST.hpp"
+int main()
+{
+    // runTests();
+    BST<int> t;
+    t.insert(66);
+    t.insert(44);
+    t.insert(33);
+    t.insert(55);
+    t.insert(77);
+    t.insert(68);
+    t.insert(72);
+    t.insert(70);
+    t.insert(71);
+    t.insert(88);
+    for (auto i : t)
+        std::cout << i << ' ';
+    std::cout << '\n';
 
-    // tree.insert(30);
-    // tree.insert(20);
-    // tree.insert(40);
-    // tree.insert(25);
-    // tree.insert(70);
-    // tree.insert(60);
-    // tree.insert(80);
-    // tree.insert(75);
-    // tree.insert(19);
-    // tree.insert(100);
-    // tree.insert(41);
-    // tree.insert(18);
-
-    // tree.insert();
-    tree.insert(25);
-    tree.insert(15);
-    tree.insert(10);
-    tree.insert(4);
-    tree.insert(12);
-    tree.insert(22);
-    tree.insert(18);
-    tree.insert(24);
-    tree.insert(50);
-    tree.insert(35);
-    tree.insert(31);
-    tree.insert(30);
-    tree.insert(29);
-    tree.insert(44);
-    tree.insert(70);
-    tree.insert(66);
-    tree.insert(90);
-    tree.insert(3);
-    tree.insert(2);
-    tree.insert(1);
-    // tree.insert(999);
-
-    tree = tree;
-
-
-    // tree.erase(90);
-    // tree.erase(70);
-    auto i = tree.prbegin();
-    // 
-    // cout << tree.max();
-    while (*i != 1000) {
-        cout << *i << endl;
-        i++;
-        // cin.get();
-    }
-    // i++;
-    // i = tree.end();
-    // cout << *i << endl;
     return 0;
 }
+/*
+ *          66
+ *         /  \
+ *        /    \
+ *      44     77
+ *     /  \   /  \
+ *   33  55  68  88
+ *             \
+ *              72
+ *             /
+ *           70
+ *             \
+ *              71
+ */
+// full tree preorder : 66 44 33 55 77 68 72 70 71 88
+// full tree inorder  : 33 44 55 66 68 70 71 72 77 88
+// full tree postorder: 33 55 44 71 70 72 68 88 77 66
+
+// After deleting root 66
+/*
+ *            68
+ *           /  \
+ *          /    \
+ *        44      77
+ *       /  \    /  \
+ *     33   55  72   88
+ *             /
+ *           70
+ *             \
+ *              71
+ */
+// full tree preorder : 68 44 33 55 77 72 70 71 88
+// full tree inorder  : 33 44 55 68 70 71 72 77 88
+// full tree postorder: 33 55 44 71 70 72 88 77 68

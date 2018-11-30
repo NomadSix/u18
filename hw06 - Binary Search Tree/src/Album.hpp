@@ -22,6 +22,8 @@ private:
     std::string _title;
     std::string _artist;
     int _year;
+
+    std::string capitalize() const;
 };
 
 #endif

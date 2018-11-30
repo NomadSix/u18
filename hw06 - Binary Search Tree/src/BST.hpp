@@ -1,3 +1,8 @@
+// File Name: BST.hpp
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 6
+
 #ifndef BINARY_SEARCH_TREE_HPP
 #define BINARY_SEARCH_TREE_HPP
 
@@ -27,14 +32,16 @@ public:
     // function prend
     preorder_iterator prend();
     inorder_iterator begin();
+    inorder_iterator begin() const;
     inorder_iterator end();
+    // inorder_iterator end() const;
     // function pobegin; po = postorder
     postorder_iterator pobegin();
     // function poend
     postorder_iterator poend();
 
     // function empty; does not throw exceptions
-    bool empty() noexcept;
+    bool empty() const noexcept;
     // function min; l-value, throws underflow if empty
     T& min();
     // function min; read-only, throws underflow if empty
@@ -65,10 +72,11 @@ private:
     Queue<T> _queue;
     // Private data and helper functions go here
     Node* rinsert(Node *node, T key) noexcept;
-    Node* eraseHelper(Node *node, T key);
+    void eraseHelper(Node *node, T key);
     void walk(Node* node);
     void prwalk(Node* node);
     void powalk(Node* node);
+    Node* search(Node* node, T key);
 };
 
 // NODE CLASS
@@ -96,24 +104,20 @@ private:
 template <typename T>
 class BST<T>::inorder_iterator {
 public:
-    inorder_iterator(Node *curr, Node *subroot);
+    inorder_iterator(Queue<T>);
     T& operator*();
     inorder_iterator& operator++();
     inorder_iterator operator++(int);
     friend bool operator==(const typename BST<T>::inorder_iterator &lhs,  const typename BST<T>::inorder_iterator &rhs)
     {
-        return lhs._curr == rhs._curr && lhs._unfinRoot == rhs._unfinRoot;
+        return lhs._queue.front() == rhs._queue.front();
     }
     friend bool operator!=(const typename BST<T>::inorder_iterator &lhs,  const typename BST<T>::inorder_iterator &rhs)
     {
         return !(lhs == rhs);
     }
 private:
-    Node* _curr;
-    Node* _unfinRoot;
-
-    // Private functions
-    void findNextSubroot();
+    Queue<T> _queue;
 };
 
 // POSTORDER_ITERATOR CLASS
@@ -126,7 +130,7 @@ public:
     postorder_iterator operator++(int);
     friend bool operator==(const typename BST<T>::postorder_iterator &lhs,  const typename BST<T>::postorder_iterator &rhs)
     {
-        return lhs._curr == rhs._curr && lhs._unfinRoot == rhs._unfinRoot;
+        return lhs._queue.front() == rhs._queue.front();
     }
     friend bool operator!=(const typename BST<T>::postorder_iterator &lhs,  const typename BST<T>::postorder_iterator &rhs)
     {
@@ -146,7 +150,7 @@ public:
     preorder_iterator operator++(int);
     friend bool operator==(const typename BST<T>::preorder_iterator &lhs,  const typename BST<T>::preorder_iterator &rhs)
     {
-        return lhs._curr == rhs._curr && lhs._unfinRoot == rhs._unfinRoot;
+        return lhs._queue.front() == rhs._queue.front();
     }
     friend bool operator!=(const typename BST<T>::preorder_iterator &lhs,  const typename BST<T>::preorder_iterator &rhs)
     {

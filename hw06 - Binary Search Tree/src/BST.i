@@ -1,3 +1,7 @@
+// File Name: BST.i
+// Author: Devon Schimming
+// Student ID: h865r773
+// Assignment Number: 6
 
 // Default Ctor
 template <typename T>
@@ -35,7 +39,7 @@ BST<T>::~BST()
 
 // function empty; does not throw exceptions
 template <typename T>
-bool BST<T>::empty() noexcept
+bool BST<T>::empty() const noexcept
 {
     return root == nullptr;
 }
@@ -45,7 +49,7 @@ T& BST<T>::min()
 {
     if (empty())
         throw std::underflow_error("BST is empty");
-    return root->key();
+    return *begin();
 }
 // function min; read-only, throws underflow if empty
 template <typename T>
@@ -53,7 +57,7 @@ T& BST<T>::min() const
 {  
     if (empty())
         throw std::underflow_error("BST is empty");
-    return root;
+    return *begin();
 }
 // function max; l-value, throws underflow if empty
 template <typename T>
@@ -107,45 +111,55 @@ void BST<T>::emplace(Args&&... args) noexcept
 template <typename T>
 void BST<T>::erase(T key)
 {
-    // if (empty())
-    //     throw std::invalid_argument("Tree is empty");
-    // auto i = begin();
-    // while (*i != key)
-    //     i++;
-    // // if (*i)
-    // //     throw std::invalid_argument("Value can't be found");
-    // // delete *i;?
     eraseHelper(root, key);
 }
 
 template <typename T>
-typename BST<T>::Node* BST<T>::eraseHelper(Node* node, T key) 
+void BST<T>::eraseHelper(Node* node, T key) 
 {
     if (!node)
-        throw std::invalid_argument("Tree is empty");
-    
-    if (key < node->key()) {
-        node->setLeft(eraseHelper(node->left(), key));
-    } else if (key > node->key()) {
-        node->setRight(eraseHelper(node->right(), key));
-    } else {
-        if (node->right() && node->left()) {    
-            Node *temp = root;  //Find the last element
-            while (temp->right()) {
-                temp = temp->right();
+        return;
+
+    if (node->key() == key) {
+        if (!node->left() && !node->right()) {
+            if (node->parent()) {
+                if (node->parent()->left() == node) {
+                    node->parent()->setLeft(nullptr);
+                } else if (node->parent()->right() == node) {
+                    node->parent()->setRight(nullptr);
+                }
             }
-            node->key() = temp->key();
-            node->setLeft(eraseHelper(node->left(), temp->key()));
-        } else {
-            Node* temp = node;
-            if (node->left() == NULL)
-                temp = node->right();
-            if (node->right() == NULL)
-                temp = node->left();
             free(node);
-            return temp;
+        } else {
+            if (node->parent()) {
+                if (node->left()) {
+                    node->parent()->setLeft(node->left());
+                    node->left()->setParent(node->parent());
+                } else if (node->right()) {
+                    node->parent()->setRight(node->right());
+                    node->right()->setParent(node->parent());
+                }
+            } else {
+                if (node->right() && node->left()) {
+                    
+                } else {
+                    delete node;
+                }
+            }
         }
+    } else {
+        eraseHelper(node->left(), key);
+        eraseHelper(node->right(), key);
     }
+}
+
+template <typename T>
+typename BST<T>::Node* BST<T>::search(Node* node, T key) 
+{
+    if (node->key() == key)
+        return node;
+    search(node->left());
+    search(node->right());
     return node;
 }
 
@@ -153,20 +167,22 @@ typename BST<T>::Node* BST<T>::eraseHelper(Node* node, T key)
 template <typename T>
 void BST<T>::clear() noexcept
 {
-
+    root->setLeft(nullptr);
+    root->setRight(nullptr);
+    root->setParent(nullptr);
+    root = nullptr;
 }
 
 // copy assignment operator overload
 template <typename T>
 const BST<T>& BST<T>::operator =(BST<T>& copy)
 {
-    if (begin() != copy.begin()) {
-        auto i = copy.begin();
-        while (*i != 0) {
-            root->insert(*i);
-            i++;
-        }
+    auto i = copy.begin();
+    while (i != copy.end()) {
+        insert(*i);
+        i++;
     }
+    return *this;
 }
 // move assignment operator overload
 template <typename T>
@@ -215,29 +231,37 @@ typename BST<T>::preorder_iterator BST<T>::prbegin()
 template <typename T>
 typename BST<T>::preorder_iterator BST<T>::prend()
 {
-    // while (root->parent() != nullptr)
-    //     root = root->parent();
-    // while (root->right() != nullptr)
-    //     root = root->right();
-    return preorder_iterator(nullptr);
+    prwalk(root);
+    while (_queue.size() != 1)
+        _queue.pop();
+    return preorder_iterator(_queue);
+}
+// function prend
+template <typename T>
+typename BST<T>::inorder_iterator BST<T>::begin() const
+{
+    return inorder_iterator(Queue<T>());
 }
 // function prend
 template <typename T>
 typename BST<T>::inorder_iterator BST<T>::begin()
 {
-    while (root->left() != nullptr)
-        root = root->left();
-    return inorder_iterator(root, root->parent());
+    walk(root);
+    return inorder_iterator(_queue);
 }
 template <typename T>
 typename BST<T>::inorder_iterator BST<T>::end()
 {
-    while (root->parent() != nullptr)
-        root = root->parent();
-    while (root->right() != nullptr)
-        root = root->right();
-    return inorder_iterator(root, root->parent());
+    walk(root);
+    while (_queue.size() != 1)
+        _queue.pop();
+    return inorder_iterator(_queue);
 }
+// template <typename T>
+// typename BST<T>::inorder_iterator BST<T>::end() const
+// {
+//     return inorder_iterator(_queue);
+// }
 // function pobegin; po = postorder
 template <typename T>
 typename BST<T>::postorder_iterator BST<T>::pobegin()
@@ -249,5 +273,8 @@ typename BST<T>::postorder_iterator BST<T>::pobegin()
 template <typename T>
 typename BST<T>::postorder_iterator BST<T>::poend()
 {
-    return postorder_iterator(nullptr);
+    powalk(root);
+    while (_queue.size() != 1)
+        _queue.pop();
+    return postorder_iterator(_queue);
 }

@@ -34,7 +34,7 @@ bool operator !=(const Album &lhs, const Album &rhs)
 
 bool operator < (const Album &lhs, const Album &rhs)
 {
-    if (lhs._artist < rhs._artist) {
+    if (lhs.capitalize() < rhs.capitalize()) {
         return true;
     } else if (lhs._artist == rhs._artist) {
         if (lhs._year < rhs._year) {
@@ -70,4 +70,16 @@ std::ostream& operator<<(std::ostream& sout, const Album &rhs)
          << "In: " << rhs._year << std::endl;
 
     return sout;
+}
+
+std::string Album::capitalize() const
+{
+    std::string tmp(_artist);
+
+    for (char &i : tmp) {
+        if (i >= 'a' && i <= 'z')
+            i -= 32;
+    }
+
+    return tmp;
 }
