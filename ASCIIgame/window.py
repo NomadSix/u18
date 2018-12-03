@@ -12,7 +12,7 @@ class window:
         self.height = height
         self.libtcod = libtcod
         libtcod.console_set_custom_font('arial12x12.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
-        libtcod.console_init_root(self.width, self.height, 'Hello World', False)
+        libtcod.console_init_root(self.width, self.height, 'HALF SLIME 3', False)
         self.game = libtcod.console_new(self.width, self.height)
         self.title = libtcod.console_new(self.width, self.height)
         self.controls = libtcod.console_new(self.width, self.height)
@@ -50,7 +50,6 @@ class window:
         
         # removes items from inventory at the beinging of a new room and returns points
         self.items = []
-        # self.items.append(item(randrange(7, 20),randrange(7, 20), 'red'))
         if len(self.char.inventory) > 0:
             items = self.char.inventory
             for key in items.keys():
@@ -61,14 +60,7 @@ class window:
                 self.char.inventory[item(0,0,'red').key] = 0
 
         map = self.tes.getMap()
-
-        ## Random Walls ##
-        # for n in range(self.numWalls):
-        #     bound = 8
-        #     x = randrange(bound, self.tes.getWidth() - bound)
-        #     y = randrange(bound, self.tes.getHeight() - bound)
-        #     self.tes.getMap()[x][y].block_sight = True
-
+        
         for y in range(self.tes.getHeight()):
             for x in range(self.tes.getWidth()):
                 if map[x][y].block_sight:
@@ -218,7 +210,7 @@ class window:
     def draw(self):
         while not self.libtcod.console_is_window_closed():
             if self.gamestate == "Title":
-                output = "ASCII GAME 2018 CS400"
+                output = "HALF SLIME 3"
                 x = self.width / 2 - len(output) / 2
                 y = self.height / 2 - 7
                 self.batch.printStr(self.title, x, y, output, self.libtcod.white)
@@ -266,20 +258,21 @@ class window:
             if exit:
                 break
     def stats(self):
+        x = 20
         y = 5
-        self.batch.printStr(self.game, self.width - 13, y, str(self.char.name), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, str(self.char.name), self.libtcod.white)
         y = y + 2
-        self.batch.printStr(self.game, self.width - 13, y, 'Str - ' + str(self.char.strength), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, 'Str - ' + str(self.char.strength), self.libtcod.white)
         y = y + 2
-        self.batch.printStr(self.game, self.width - 13, y, 'Dex - ' + str(self.char.dexterity), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, 'Dex - ' + str(self.char.dexterity), self.libtcod.white)
         y = y + 2
-        self.batch.printStr(self.game, self.width - 13, y, 'Int - ' + str(self.char.intelligence), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, 'Int - ' + str(self.char.intelligence), self.libtcod.white)
         y = y + 2
-        self.batch.printStr(self.game, self.width - 13, y, 'Wis - ' + str(self.char.wisdom), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, 'Wis - ' + str(self.char.wisdom), self.libtcod.white)
         y = y + 2
-        self.batch.printStr(self.game, self.width - 13, y, 'Chr - ' + str(self.char.charisma), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, 'Chr - ' + str(self.char.charisma), self.libtcod.white)
         y = y + 5
-        self.batch.printStr(self.game, self.width - 13, y, 'Points - ' + str(self.char.points), self.libtcod.white)
+        self.batch.printStr(self.game, self.width - x, y, 'Points - ' + str(self.char.points), self.libtcod.white)
 
         #inventory
         y = 31

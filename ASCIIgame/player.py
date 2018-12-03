@@ -9,7 +9,7 @@ class player(obj):
         self.y = y
         self.char = char
         self.color = color
-        self.name = "<name?>"
+        self.name = "Gordan Slimeman"
         self.strength = 0
         self.dexterity = 0
         self.intelligence = 0
