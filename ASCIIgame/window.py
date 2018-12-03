@@ -55,9 +55,9 @@ class window:
             for key in items.keys():
                 self.char.points = self.char.points + (items[key] * item(0,0,key).value)
                 items.pop(key)
-                self.char.inventory[item(0,0,'yellow').key] = 0
-                self.char.inventory[item(0,0,'green').key] = 0
-                self.char.inventory[item(0,0,'red').key] = 0
+            self.char.inventory[item(0,0,'yellow').key] = 0
+            self.char.inventory[item(0,0,'green').key] = 0
+            self.char.inventory[item(0,0,'red').key] = 0
 
         map = self.tes.getMap()
         
@@ -171,7 +171,6 @@ class window:
                 self.gamestate = 'Title'
                 break
             # print(self.red)
-            print(self.red)
 
         #     if obj.key == 'red' and obj.dead == False:
         #         x = obj.getLoc()[0]

@@ -20,6 +20,17 @@ int main()
     // t.insert(70);
     // t.insert(71);
     // t.insert(88);
+    // t.erase(33);
+    // t.erase(44);
+    // t.erase(55);
+    // t.erase(66);
+
+    // auto i = t.begin();
+    // while (*i != 100) {
+    //     std::cout << *i << ' ';
+    //     i++;
+    // }
+    // std::cout << '\n';
     // for (auto i : t)
     //     std::cout << i << ' ';
     // std::cout << '\n';

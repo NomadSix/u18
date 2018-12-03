@@ -18,7 +18,7 @@ T& BST<T>::inorder_iterator::operator*()
 template <typename T>
 typename BST<T>::inorder_iterator& BST<T>::inorder_iterator::operator++()
 {
-    if (_queue.front())
+    if (_queue.size() != 1)
         _queue.pop();
     return *this;
 }

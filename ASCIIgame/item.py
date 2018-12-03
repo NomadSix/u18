@@ -6,15 +6,11 @@ class item:
         self.dead = False
         self.value = 0
         if key == 'yellow':
-            self.value = 5
+            self.value = 2
         elif key == 'green':
             self.value = 1
         elif key == 'red':
-            self.value = -5
-        elif key == 'orange':
-            self.value = 3
-        elif key == 'blue':
-            self.value = 4
+            self.value = -2
     
     def getLoc(self):
         return [self.x, self.y]
@@ -26,7 +22,3 @@ class item:
             return libtcod.dark_green
         elif self.key == 'red':
             return libtcod.Color(200, 0, 0)
-        elif self.key == 'orange':
-            return libtcod.Color(255, 165, 0)
-        elif self.key == "blue":
-            return libtcod.Color(0,0,200)
