@@ -7,13 +7,15 @@
 template <typename T>
 BST<T>::BST() 
     : root(nullptr)
-{}
+{
+}
 
 // Parameterized Ctor
 template <typename T>
 BST<T>::BST(const T& value)
     : root(new Node(value))
-{}
+{
+}
 
 // Copy Ctor
 template <typename T>
@@ -73,7 +75,7 @@ T& BST<T>::max() const
 {
     if (empty())
         throw std::underflow_error("function empty can't be run as tree is empty");
-    return *end();
+    return root->key();
 }
 
 // recursive insert
@@ -167,10 +169,11 @@ typename BST<T>::Node* BST<T>::search(Node* node, T key)
 template <typename T>
 void BST<T>::clear() noexcept
 {
-    root->setLeft(nullptr);
-    root->setRight(nullptr);
-    root->setParent(nullptr);
-    root = nullptr;
+    if (root) {
+        root = nullptr;
+    }
+    // root->setParent(nullptr);
+    // root = nullptr;
 }
 
 // copy assignment operator overload
@@ -262,6 +265,7 @@ typename BST<T>::inorder_iterator BST<T>::end()
 // {
 //     return inorder_iterator(_queue);
 // }
+
 // function pobegin; po = postorder
 template <typename T>
 typename BST<T>::postorder_iterator BST<T>::pobegin()

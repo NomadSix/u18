@@ -8,21 +8,21 @@
 #include "BST.hpp"
 int main()
 {
-    // runTests();
-    BST<int> t;
-    t.insert(66);
-    t.insert(44);
-    t.insert(33);
-    t.insert(55);
-    t.insert(77);
-    t.insert(68);
-    t.insert(72);
-    t.insert(70);
-    t.insert(71);
-    t.insert(88);
-    for (auto i : t)
-        std::cout << i << ' ';
-    std::cout << '\n';
+    runTests();
+    // BST<int> t;
+    // t.insert(66);
+    // t.insert(44);
+    // t.insert(33);
+    // t.insert(55);
+    // t.insert(77);
+    // t.insert(68);
+    // t.insert(72);
+    // t.insert(70);
+    // t.insert(71);
+    // t.insert(88);
+    // for (auto i : t)
+    //     std::cout << i << ' ';
+    // std::cout << '\n';
 
     return 0;
 }
