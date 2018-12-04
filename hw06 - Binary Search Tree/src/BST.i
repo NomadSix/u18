@@ -21,8 +21,28 @@ BST<T>::BST(const T& value)
 template <typename T>
 BST<T>::BST(BST& copy)
 {
-    for (auto& value : copy)
-        insert(value);
+    // if (copy.root == nullptr)
+    //     root = nullptr;
+    // else
+    //     copyTree(root, copy.root);
+    // auto it = copy.begin();=
+    // clear();
+    root = copy.root;
+    // for (auto i : copy) {
+    //     insert(i);
+    // }
+}
+
+template <typename T>
+void BST<T>::copyTree(Node* curr, Node* sub)
+{
+    // if(sub == nullptr) {
+    //     curr = nullptr;
+    // } else {
+    //     curr = new Node(sub->key());
+    //     copyTree(curr->left(), sub->left());
+    //     copyTree(curr->right(), sub->right());
+    // }
 }
 
 // Move Ctor
@@ -51,7 +71,9 @@ T& BST<T>::min()
 {
     if (empty())
         throw std::underflow_error("BST is empty");
-    return *begin();
+    while (root->left() != nullptr)
+        root = root->left();
+    return root->key();
 }
 // function min; read-only, throws underflow if empty
 template <typename T>
@@ -67,7 +89,9 @@ T& BST<T>::max()
 {
     if (empty())
         throw std::underflow_error("function empty can't be run as tree is empty");
-    return *end();
+    while (root->right() != nullptr)
+        root = root->right();
+    return root->key();
 }
 // function max; read-only, throws underflow if empty
 template <typename T>
@@ -98,6 +122,24 @@ template<typename T>
 void BST<T>::insert(T key) noexcept
 {
     root = rinsert(root, key);
+    // Node* y = nullptr;
+    // Node* x = root;
+    // Node* z = new Node(key);
+    // while (x != nullptr) {
+    //     y = x;
+    //     if (z->key() < x->key()) {
+    //         x = x->left();
+    //     } else {
+    //         x = x->right();
+    //     }
+    // }
+    // z->setParent(y);
+    // if (y == nullptr)
+    //     root = z;
+    // else if (z->key() < y->key())
+    //     y->setLeft(z);
+    // else
+    //     y->setRight(z);
 }
 
 
@@ -114,6 +156,23 @@ template <typename T>
 void BST<T>::erase(T key)
 {
     eraseHelper(root, key);
+    // Node* z = search(root, key);
+    // if (z->left() == nullptr) {
+    //     transplant(z, z->right());
+    // } else if (z->right() == nullptr) {
+    //     transplant(z, z->left());
+    // } else {
+    //     auto temp = min();
+    //     Node* y = search(root, temp);
+    //     if (y != z) {
+    //         transplant(y, y->right());
+    //         y->setRight(z->right());
+    //         y->right()->setParent(y);
+    //     }
+    //     transplant(z,y);
+    //     y->setLeft(z->left());
+    //     y->left()->setParent(y);
+    // }
 }
 
 template <typename T>
@@ -156,24 +215,47 @@ void BST<T>::eraseHelper(Node* node, T key)
 }
 
 template <typename T>
+void BST<T>::transplant(Node* curr, Node* sub)
+{
+    if (curr->parent() == nullptr) {
+        root = sub;
+    } else if (curr == curr->parent()->left()) {
+        curr->parent()->setLeft(sub);
+    } else {
+        curr->parent()->setRight(curr);
+    }
+    if (sub == nullptr)
+        sub->setParent(curr->parent());
+}
+
+template <typename T>
 typename BST<T>::Node* BST<T>::search(Node* node, T key) 
 {
-    if (node->key() == key)
+    if (node == nullptr || key == node->key())
         return node;
-    search(node->left());
-    search(node->right());
-    return node;
+    if (key < node->key())
+        return search(node->left(), key);
+    else
+        return search(node->right(), key);
 }
 
 // function clear; does not throw exceptions
 template <typename T>
 void BST<T>::clear() noexcept
 {
-    if (root) {
-        root = nullptr;
-    }
-    // root->setParent(nullptr);
-    // root = nullptr;
+    // clearTree(root);
+    clearTree(root);
+    root = nullptr;
+}
+
+template <typename T>
+void BST<T>::clearTree(Node* node)
+{
+    if (node == nullptr)
+        return;
+    clearTree(node->left());
+    delete node;
+    clearTree(node->right());
 }
 
 // copy assignment operator overload
@@ -187,6 +269,7 @@ const BST<T>& BST<T>::operator =(BST<T>& copy)
     }
     return *this;
 }
+
 // move assignment operator overload
 template <typename T>
 BST<T>& BST<T>::operator =(BST<T>&& move)
@@ -204,6 +287,7 @@ void BST<T>::walk(Node* node)
     _queue.push(node->key());
     walk(node->right());
 }
+
 template <typename T>
 void BST<T>::prwalk(Node* node)
 {
@@ -213,6 +297,7 @@ void BST<T>::prwalk(Node* node)
     prwalk(node->left());
     prwalk(node->right());
 }
+
 template <typename T>
 void BST<T>::powalk(Node* node)
 {
@@ -234,17 +319,17 @@ typename BST<T>::preorder_iterator BST<T>::prbegin()
 template <typename T>
 typename BST<T>::preorder_iterator BST<T>::prend()
 {
-    prwalk(root);
-    while (_queue.size() != 1)
-        _queue.pop();
-    return preorder_iterator(_queue);
+    _queue = Queue<T>();
+    return preorder_iterator(Queue<T>(max()));
 }
+
 // function prend
 template <typename T>
 typename BST<T>::inorder_iterator BST<T>::begin() const
 {
     return inorder_iterator(Queue<T>());
 }
+
 // function prend
 template <typename T>
 typename BST<T>::inorder_iterator BST<T>::begin()
@@ -252,19 +337,13 @@ typename BST<T>::inorder_iterator BST<T>::begin()
     walk(root);
     return inorder_iterator(_queue);
 }
+
 template <typename T>
 typename BST<T>::inorder_iterator BST<T>::end()
 {
-    walk(root);
-    while (_queue.size() != 1)
-        _queue.pop();
-    return inorder_iterator(_queue);
+    _queue = Queue<T>();
+    return inorder_iterator(Queue<T>(max()));
 }
-// template <typename T>
-// typename BST<T>::inorder_iterator BST<T>::end() const
-// {
-//     return inorder_iterator(_queue);
-// }
 
 // function pobegin; po = postorder
 template <typename T>
@@ -273,12 +352,11 @@ typename BST<T>::postorder_iterator BST<T>::pobegin()
     powalk(root);
     return postorder_iterator(_queue);
 }
+
 // function poend
 template <typename T>
 typename BST<T>::postorder_iterator BST<T>::poend()
 {
-    powalk(root);
-    while (_queue.size() != 1)
-        _queue.pop();
-    return postorder_iterator(_queue);
+    _queue = Queue<T>();
+    return postorder_iterator(Queue<T>(root->key()));
 }

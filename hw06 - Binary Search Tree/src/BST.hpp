@@ -76,6 +76,9 @@ private:
     void walk(Node* node);
     void prwalk(Node* node);
     void powalk(Node* node);
+    void copyTree(Node* curr, Node* sub);
+    void transplant(Node* curr, Node* sub);
+    void clearTree(Node* node);
     Node* search(Node* node, T key);
 };
 

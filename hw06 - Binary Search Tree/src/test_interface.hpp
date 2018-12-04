@@ -46,45 +46,45 @@ void runTests()
     const unsigned int WIDTH = 55;
 
     char prev = cout.fill('.');
-    // std::cout << setw(WIDTH) << left << "Default Ctor, Dtor" << (dctor()) << endl;
-    // std::cout << setw(WIDTH) << left << "Parameterized Ctor, Dtor" << (pctor()) << endl;
-    // std::cout << setw(WIDTH) << left << "empty()" << (empty(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "insert()" << (insert()) << endl;
-    // std::cout << setw(WIDTH) << left << "empty() (Now with insert()!)" << (empty(false)) << endl;
-    // std::cout << setw(WIDTH) << left << "min()" << (min(false)) << endl;
-    // std::cout << setw(WIDTH) << left << "min() (exception)" << (min(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "max()" << (max(false)) << endl;
-    // std::cout << setw(WIDTH) << left << "max() (exception)" << (max(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "emplace()" << (emplace()) << endl;
-    // std::cout << setw(WIDTH) << left << "clear()" << (clear()) << endl;
-    // std::cout << setw(WIDTH) << left << "prbegin()" << (prbegin()) << endl;
-    // std::cout << setw(WIDTH) << left << "prend()" << (prend()) << endl;
-    // std::cout << setw(WIDTH) << left << "preorder iteration" << (priter()) << endl;
-    // std::cout << setw(WIDTH) << left << "begin()" << (begin()) << endl;
-    // std::cout << setw(WIDTH) << left << "end()" << (end()) << endl;
-    // std::cout << setw(WIDTH) << left << "pobegin()" << (pobegin()) << endl;
-    // std::cout << setw(WIDTH) << left << "poend()" << (poend()) << endl;
-    // std::cout << setw(WIDTH) << left << "postorder iteration" << (poiter()) << endl;
-    // // std::cout << setw(WIDTH) << left << "Copy Ctor" << (cctor()) << endl; SEGMENTATION
-    // std::cout << setw(WIDTH) << left << "Move Ctor" << (mtor()) << endl;
-    std::cout << setw(WIDTH) << left << "min() (const)" << (minConst(false)) << endl;
-    // std::cout << setw(WIDTH) << left << "min() (const, exception)" << (minConst(true)) << endl;
+    std::cout << setw(WIDTH) << left << "Default Ctor, Dtor" << (dctor()) << endl;
+    std::cout << setw(WIDTH) << left << "Parameterized Ctor, Dtor" << (pctor()) << endl;
+    std::cout << setw(WIDTH) << left << "empty()" << (empty(true)) << endl;
+    std::cout << setw(WIDTH) << left << "insert()" << (insert()) << endl;
+    std::cout << setw(WIDTH) << left << "empty() (Now with insert()!)" << (empty(false)) << endl;
+    std::cout << setw(WIDTH) << left << "min()" << (min(false)) << endl;
+    std::cout << setw(WIDTH) << left << "min() (exception)" << (min(true)) << endl;
+    std::cout << setw(WIDTH) << left << "max()" << (max(false)) << endl;
+    std::cout << setw(WIDTH) << left << "max() (exception)" << (max(true)) << endl;
+    std::cout << setw(WIDTH) << left << "emplace()" << (emplace()) << endl;
+    std::cout << setw(WIDTH) << left << "clear()" << (clear()) << endl;
+    std::cout << setw(WIDTH) << left << "prbegin()" << (prbegin()) << endl;
+    std::cout << setw(WIDTH) << left << "prend()" << (prend()) << endl;
+    std::cout << setw(WIDTH) << left << "preorder iteration" << (priter()) << endl;
+    std::cout << setw(WIDTH) << left << "begin()" << (begin()) << endl;
+    std::cout << setw(WIDTH) << left << "end()" << (end()) << endl;
+    std::cout << setw(WIDTH) << left << "pobegin()" << (pobegin()) << endl;
+    std::cout << setw(WIDTH) << left << "poend()" << (poend()) << endl;
+    std::cout << setw(WIDTH) << left << "postorder iteration" << (poiter()) << endl;
+    std::cout << setw(WIDTH) << left << "Copy Ctor" << (cctor()) << endl; //SEGMENTATION
+    std::cout << setw(WIDTH) << left << "Move Ctor" << (mtor()) << endl;
+    // std::cout << setw(WIDTH) << left << "min() (const)" << (minConst(false)) << endl;
+    std::cout << setw(WIDTH) << left << "min() (const, exception)" << (minConst(true)) << endl;
     // std::cout << setw(WIDTH) << left << "max() (const)" << (maxConst(false)) << endl; // SEGMENTATION
-    // std::cout << setw(WIDTH) << left << "max() (const, exception)" << (maxConst(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "erase() (leaf)" << (eraseLeaf()) << endl;
-    // std::cout << setw(WIDTH) << left << "erase() (exception)" << (eraseexc()) << endl;
-    // std::cout << setw(WIDTH) << left << "erase() (one child (left))" << (eraseSingle(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "erase() (one child (right))" << (eraseSingle(false)) << endl;
-    // std::cout << setw(WIDTH) << left << "erase() (two children)" << (eraseTwo()) << endl;
-    // std::cout << setw(WIDTH) << left << "erase() (root)" << (eraseRoot()) << endl;
-    // std::cout << setw(WIDTH) << left << "adv. preorder iterator ('list' down left)" << (advPritLine(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "adv. preorder iterator ('list' down right)" << (advPritLine(false)) << endl; 
-    // std::cout << setw(WIDTH) << left << "adv. preorder iterator (lightning going left first)" << (advPritJagged(true))     << endl;
-    // std::cout << setw(WIDTH) << left << "adv. preorder iterator (lightning going right first)" << (advPritJagged(false)) << endl;   
-    // std::cout << setw(WIDTH) << left << "adv. postorder iterator ('list' down left)" << (advPoitLine(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "adv. postorder iterator ('list' down right)" << (advPoitLine(false)) << endl; 
-    // std::cout << setw(WIDTH) << left << "adv. postorder iterator (lightning going left first)" << (advPoitJagged(true))     << endl;
-    // std::cout << setw(WIDTH) << left << "adv. postorder iterator (lightning going right first)" << (advPoitJagged(false)) << endl;
+    std::cout << setw(WIDTH) << left << "max() (const, exception)" << (maxConst(true)) << endl;
+    std::cout << setw(WIDTH) << left << "erase() (leaf)" << (eraseLeaf()) << endl;
+    std::cout << setw(WIDTH) << left << "erase() (exception)" << (eraseexc()) << endl;
+    std::cout << setw(WIDTH) << left << "erase() (one child (left))" << (eraseSingle(true)) << endl;
+    std::cout << setw(WIDTH) << left << "erase() (one child (right))" << (eraseSingle(false)) << endl;
+    std::cout << setw(WIDTH) << left << "erase() (two children)" << (eraseTwo()) << endl;
+    std::cout << setw(WIDTH) << left << "erase() (root)" << (eraseRoot()) << endl;
+    std::cout << setw(WIDTH) << left << "adv. preorder iterator ('list' down left)" << (advPritLine(true)) << endl;
+    std::cout << setw(WIDTH) << left << "adv. preorder iterator ('list' down right)" << (advPritLine(false)) << endl; 
+    std::cout << setw(WIDTH) << left << "adv. preorder iterator (lightning going left first)" << (advPritJagged(true))     << endl;
+    std::cout << setw(WIDTH) << left << "adv. preorder iterator (lightning going right first)" << (advPritJagged(false)) << endl;   
+    std::cout << setw(WIDTH) << left << "adv. postorder iterator ('list' down left)" << (advPoitLine(true)) << endl;
+    std::cout << setw(WIDTH) << left << "adv. postorder iterator ('list' down right)" << (advPoitLine(false)) << endl; 
+    std::cout << setw(WIDTH) << left << "adv. postorder iterator (lightning going left first)" << (advPoitJagged(true))     << endl;
+    std::cout << setw(WIDTH) << left << "adv. postorder iterator (lightning going right first)" << (advPoitJagged(false)) << endl;
     
     cout.fill(prev);
 }
@@ -478,6 +478,7 @@ bool minConst(bool throwing)
             return false;
         }
     } else {
+    cout << "hello\n";
         return u.min() == 23;
     }
 
