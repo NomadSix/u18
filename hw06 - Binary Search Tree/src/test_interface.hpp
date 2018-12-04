@@ -67,9 +67,9 @@ void runTests()
     std::cout << setw(WIDTH) << left << "postorder iteration" << (poiter()) << endl;
     std::cout << setw(WIDTH) << left << "Copy Ctor" << (cctor()) << endl; //SEGMENTATION
     std::cout << setw(WIDTH) << left << "Move Ctor" << (mtor()) << endl;
-    // std::cout << setw(WIDTH) << left << "min() (const)" << (minConst(false)) << endl;
+    std::cout << setw(WIDTH) << left << "min() (const)" << (minConst(false)) << endl;
     std::cout << setw(WIDTH) << left << "min() (const, exception)" << (minConst(true)) << endl;
-    // std::cout << setw(WIDTH) << left << "max() (const)" << (maxConst(false)) << endl; // SEGMENTATION
+    std::cout << setw(WIDTH) << left << "max() (const)" << (maxConst(false)) << endl; // SEGMENTATION
     std::cout << setw(WIDTH) << left << "max() (const, exception)" << (maxConst(true)) << endl;
     std::cout << setw(WIDTH) << left << "erase() (leaf)" << (eraseLeaf()) << endl;
     std::cout << setw(WIDTH) << left << "erase() (exception)" << (eraseexc()) << endl;
@@ -478,7 +478,6 @@ bool minConst(bool throwing)
             return false;
         }
     } else {
-    cout << "hello\n";
         return u.min() == 23;
     }
 

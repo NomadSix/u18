@@ -56,7 +56,6 @@ BST<T>::BST(BST&& move)
 template <typename T>
 BST<T>::~BST() 
 {
-    delete root;
 }
 
 // function empty; does not throw exceptions
@@ -81,7 +80,7 @@ T& BST<T>::min() const
 {  
     if (empty())
         throw std::underflow_error("BST is empty");
-    return *begin();
+    return root->key();
 }
 // function max; l-value, throws underflow if empty
 template <typename T>
@@ -190,7 +189,7 @@ void BST<T>::eraseHelper(Node* node, T key)
                     node->parent()->setRight(nullptr);
                 }
             }
-            free(node);
+            // free(node);
         } else {
             if (node->parent()) {
                 if (node->left()) {
@@ -204,7 +203,7 @@ void BST<T>::eraseHelper(Node* node, T key)
                 if (node->right() && node->left()) {
                     
                 } else {
-                    delete node;
+                    // delete node;
                 }
             }
         }
@@ -327,7 +326,8 @@ typename BST<T>::preorder_iterator BST<T>::prend()
 template <typename T>
 typename BST<T>::inorder_iterator BST<T>::begin() const
 {
-    return inorder_iterator(Queue<T>());
+    walk(root);
+    return inorder_iterator(_queue);
 }
 
 // function prend
