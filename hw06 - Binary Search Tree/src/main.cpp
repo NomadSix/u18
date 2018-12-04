@@ -9,17 +9,17 @@
 int main()
 {
     runTests();
-    BST<int> t;
-    t.insert(66);
-    t.insert(44);
-    t.insert(33);
-    t.insert(55);
-    t.insert(77);
-    t.insert(68);
-    t.insert(72);
-    t.insert(70);
-    t.insert(71);
-    t.insert(88);
+    // BST<int> t;
+    // t.insert(66);
+    // t.insert(44);
+    // t.insert(33);
+    // t.insert(55);
+    // t.insert(77);
+    // t.insert(68);
+    // t.insert(72);
+    // t.insert(70);
+    // t.insert(71);
+    // t.insert(88);
     // t.insert(90);
     // t.erase(33);
     // t.erase(44);
@@ -30,11 +30,11 @@ int main()
 
     // std::cout << t.max();
     // std::cout << '\n';
-    for (auto it = t.begin(); it != t.end(); ++it) {
-        std::cout << *it << ' ';
-    }
+    // for (auto it = t.begin(); it != t.end(); ++it) {
+    //     std::cout << *it << ' ';
+    // }
     // std::cout << *t.end();
-    std::cout << '\n';
+    // std::cout << '\n';
 
     return 0;
 }

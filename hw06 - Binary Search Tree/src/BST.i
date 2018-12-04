@@ -154,24 +154,53 @@ void BST<T>::emplace(Args&&... args) noexcept
 template <typename T>
 void BST<T>::erase(T key)
 {
-    eraseHelper(root, key);
-    // Node* z = search(root, key);
-    // if (z->left() == nullptr) {
-    //     transplant(z, z->right());
-    // } else if (z->right() == nullptr) {
-    //     transplant(z, z->left());
-    // } else {
-    //     auto temp = min();
-    //     Node* y = search(root, temp);
-    //     if (y != z) {
-    //         transplant(y, y->right());
-    //         y->setRight(z->right());
-    //         y->right()->setParent(y);
-    //     }
-    //     transplant(z,y);
-    //     y->setLeft(z->left());
-    //     y->left()->setParent(y);
-    // }
+    // eraseHelper(root, key);
+    Node* z = search(root, key);
+    if (empty())
+        throw std::invalid_argument("tree is empty");
+    if (z->left() == nullptr) {
+        transplant(z, z->right());
+    } else if (z->right() == nullptr) {
+        transplant(z, z->left());
+    } else {
+        auto temp = min();
+        Node* y = search(root, temp);
+        if (y->parent() != z) {
+            transplant(y, y->right());
+            y->setRight(z->right());
+            y->right()->setParent(y);
+        }
+        transplant(z,y);
+        y->setLeft(z->left());
+        y->left()->setParent(y);
+    }
+}
+
+template <typename T>
+void BST<T>::transplant(Node* curr, Node* sub)
+{
+    if (curr->parent() == nullptr) {
+        root = sub;
+    } else if (curr == curr->parent()->left()) {
+        curr->parent()->setLeft(sub);
+    } else {
+        curr->parent()->setRight(sub);
+    }
+    if (sub != nullptr)
+        sub->setParent(curr->parent());
+}
+
+template <typename T>
+typename BST<T>::Node* BST<T>::search(Node* node, T key) 
+{
+    if (node == nullptr || key == node->key())
+        return node;
+    if (key < node->key())
+        return search(node->left(), key);
+    else
+        return search(node->right(), key);
+    if (node->right() == nullptr)
+        throw std::invalid_argument("item cant be found");
 }
 
 template <typename T>
@@ -211,31 +240,6 @@ void BST<T>::eraseHelper(Node* node, T key)
         eraseHelper(node->left(), key);
         eraseHelper(node->right(), key);
     }
-}
-
-template <typename T>
-void BST<T>::transplant(Node* curr, Node* sub)
-{
-    if (curr->parent() == nullptr) {
-        root = sub;
-    } else if (curr == curr->parent()->left()) {
-        curr->parent()->setLeft(sub);
-    } else {
-        curr->parent()->setRight(curr);
-    }
-    if (sub == nullptr)
-        sub->setParent(curr->parent());
-}
-
-template <typename T>
-typename BST<T>::Node* BST<T>::search(Node* node, T key) 
-{
-    if (node == nullptr || key == node->key())
-        return node;
-    if (key < node->key())
-        return search(node->left(), key);
-    else
-        return search(node->right(), key);
 }
 
 // function clear; does not throw exceptions
